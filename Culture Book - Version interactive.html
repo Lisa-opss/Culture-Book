@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Culture Book, Brakson</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #041365;
+    --navy-mid: #161A5A;
+    --electric: #A0EC9D;
+    --electric-dim: rgba(160,236,157,0.15);
+    --white: #FFFFFF;
+    --offwhite: #F5F5F0;
+    --muted: rgba(255,255,255,0.55);
+    --border: rgba(255,255,255,0.12);
+    --card-bg: rgba(255,255,255,0.05);
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: var(--font-body);
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 60px;
+    background: rgba(4,19,101,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--electric); }
+  .nav-links {
+    display: flex; gap: 8px;
+  }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 100px;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+    font-family: var(--font-body);
+    font-weight: 400;
+  }
+  .nav-links a:hover {
+    color: var(--white);
+    border-color: var(--border);
+    background: var(--card-bg);
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(160,236,157,0.08) 0%, transparent 70%);
+  }
+  .hero-photos {
+    position: absolute; inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0;
+    opacity: 0.18;
+  }
+  .hero-photos img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(4,19,101,0.3) 0%, rgba(4,19,101,0.6) 50%, rgba(4,19,101,1) 100%);
+  }
+  .hero-content {
+    position: relative;
+    text-align: center;
+    max-width: 800px;
+  }
+  .hero-tag {
+    display: block;
+    font-family: var(--font-head);
+    font-size: clamp(32px, 5vw, 64px);
+    font-weight: 800;
+    letter-spacing: 0px;
+    line-height: 1;
+    color: var(--white);
+    opacity: 0.08;
+    margin-bottom: 24px;
+    text-transform: none;
+    border: none;
+    padding: 0;
+    border-radius: 0;
+    pointer-events: none;
+  }
+  h1 {
+    font-family: var(--font-head);
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+  }
+  h1 em {
+    font-style: normal;
+    color: var(--electric);
+  }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto 48px;
+    font-weight: 300;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--electric);
+    color: var(--navy);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 15px;
+    padding: 14px 28px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(160,236,157,0.3); }
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--electric), transparent);
+    animation: scrollAnim 1.8s ease-in-out infinite;
+  }
+  @keyframes scrollAnim {
+    0%,100%{opacity:0.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.2)}
+  }
+
+  /* SECTION COMMON */
+  section {
+    padding: 100px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--electric);
+    margin-bottom: 16px;
+  }
+  h2 {
+    font-family: var(--font-head);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 20px;
+  }
+  .section-intro {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 100%;
+    font-weight: 300;
+    margin-bottom: 64px;
+  }
+
+  /* MISSION */
+  #mission {
+    border-bottom: 1px solid var(--border);
+  }
+  .mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .mission-cell {
+    padding: 48px;
+    background: var(--card-bg);
+    transition: background 0.3s;
+  }
+  .mission-cell:hover { background: rgba(255,255,255,0.08); }
+  .mission-cell h3 {
+    font-family: var(--font-head);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--electric);
+    margin-bottom: 20px;
+  }
+  .mission-cell p {
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--white);
+  }
+  .mission-cell.dark {
+    background: var(--electric);
+    color: var(--navy);
+  }
+  .mission-cell.dark h3 { color: rgba(4,19,101,0.6); }
+  .mission-cell.dark p { color: var(--navy); font-weight: 400; }
+  .mission-cell.dark:hover { background: #8BCC88; }
+
+  /* VALUES */
+  #values { border-bottom: 1px solid var(--border); }
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  .value-card {
+    padding: 36px 24px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--card-bg);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    position: relative;
+    overflow: hidden;
+  }
+  .value-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--electric);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+  .value-card:hover::before, .value-card.active::before { transform: scaleX(1); }
+  .value-card:hover, .value-card.active {
+    border-color: rgba(160,236,157,0.3);
+    background: rgba(160,236,157,0.05);
+    transform: translateY(-4px);
+  }
+  .value-icon {
+    width: 48px; height: 48px;
+    background: var(--electric-dim);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+  .value-card h3 {
+    font-family: var(--font-head);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .value-card .tagline {
+    font-size: 12px;
+    color: var(--electric);
+    font-weight: 500;
+  }
+
+  /* VALUE DETAIL */
+  .value-detail {
+    display: none;
+    margin-top: 32px;
+    padding: 48px;
+    border: 1px solid rgba(160,236,157,0.2);
+    border-radius: 20px;
+    background: rgba(160,236,157,0.04);
+    animation: fadeIn 0.35s ease;
+  }
+  .value-detail.show { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .detail-intro-title {
+    grid-column: 1/-1;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .detail-intro-body {
+    grid-column: 1/-1;
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.75;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+    white-space: pre-line;
+  }
+  .detail-block h4 {
+    font-family: var(--font-head);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--electric);
+    margin-bottom: 12px;
+  }
+  .detail-block p {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  /* PHOTOS */
+  #team { border-bottom: 1px solid var(--border); }
+  .photos-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 260px 260px;
+    gap: 12px;
+  }
+  .photo-item {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  .photo-item:first-child { grid-row: 1 / 3; }
+  .photo-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    filter: brightness(0.85);
+  }
+  .photo-item:hover img { transform: scale(1.05); filter: brightness(1); }
+  .photo-item .photo-label {
+    position: absolute;
+    bottom: 16px; left: 16px;
+    background: rgba(4,19,101,0.75);
+    backdrop-filter: blur(8px);
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--electric);
+    border: 1px solid rgba(160,236,157,0.2);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .photo-item:hover .photo-label { opacity: 1; }
+
+  /* TESTIMONIALS */
+  #testimonials { border-bottom: 1px solid var(--border); }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .testimonial-card {
+    padding: 40px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--card-bg);
+    position: relative;
+    transition: all 0.3s;
+  }
+  .testimonial-card:hover {
+    border-color: rgba(160,236,157,0.25);
+    background: rgba(160,236,157,0.03);
+    transform: translateY(-3px);
+  }
+  .quote-mark {
+    font-family: var(--font-head);
+    font-size: 80px;
+    line-height: 0.8;
+    color: var(--electric);
+    opacity: 0.3;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .testimonial-card blockquote {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--white);
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .author-avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: var(--electric-dim);
+    border: 1px solid rgba(160,236,157,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-head);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--electric);
+  }
+  .author-info strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .author-info span {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* WORK LIFE */
+  #worklife { border-bottom: 1px solid var(--border); }
+  .cards-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .wl-card {
+    padding: 36px 32px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--card-bg);
+    transition: all 0.3s;
+  }
+  .wl-card:hover {
+    border-color: rgba(160,236,157,0.25);
+    background: rgba(160,236,157,0.04);
+    transform: translateY(-4px);
+  }
+  .wl-num {
+    font-family: var(--font-head);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--electric);
+    opacity: 0.7;
+    margin-bottom: 12px;
+  }
+  .wl-card h3 {
+    font-family: var(--font-head);
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .wl-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 60px;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  footer .footer-logo {
+    font-family: var(--font-head);
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+  }
+  footer .footer-logo span { color: var(--electric); }
+  footer p {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+  .footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border: 1px solid rgba(160,236,157,0.3);
+    border-radius: 100px;
+    color: var(--electric);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .footer-link:hover {
+    background: var(--electric);
+    color: var(--navy);
+    border-color: var(--electric);
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section { padding: 64px 24px; }
+    .hero { padding: 100px 24px 60px; }
+    .values-grid { grid-template-columns: repeat(2, 1fr); }
+    .mission-grid { grid-template-columns: 1fr; }
+    .photos-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .photo-item:first-child { grid-row: auto; }
+    .cards-row { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .value-detail.show { grid-template-columns: 1fr; }
+  }
+
+  /* BEHAVIOR & CULTURE BLOCKS */
+  .culture-block { margin-bottom: 0; }
+  .behavior-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .behavior-card {
+    padding: 28px 26px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--card-bg);
+    transition: all 0.3s;
+  }
+  .behavior-card:hover {
+    border-color: rgba(160,236,157,0.3);
+    background: rgba(160,236,157,0.05);
+    transform: translateY(-3px);
+  }
+  .behavior-card h4 {
+    font-family: var(--font-head);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--electric);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .behavior-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+  .anecdote-card {
+    padding: 28px 32px;
+    border: 1px solid rgba(160,236,157,0.25);
+    border-radius: 16px;
+    background: rgba(160,236,157,0.05);
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .anecdote-label {
+    font-family: var(--font-head);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--electric);
+    display: block;
+    margin-bottom: 12px;
+  }
+  .anecdote-card p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.75;
+    font-weight: 300;
+  }
+  .anecdote-card strong { color: var(--white); font-style: normal; }
+  @media (max-width: 900px) { .behavior-grid { grid-template-columns: 1fr; } }
+
+  /* MISSION OPTION A */
+  .mission-a { border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+  .mission-a-hero { display: grid; grid-template-columns: 1fr 1fr; }
+  .mission-a-left {
+    padding: 40px 44px;
+    background: rgba(255,255,255,0.04);
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .mission-a-right {
+    padding: 40px 44px;
+    background: var(--electric);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .mission-a-tag {
+    font-family: var(--font-head);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--electric); margin-bottom: 16px;
+  }
+  .mission-a-tag--dark { color: rgba(4,19,101,0.55); }
+  .mission-a-statement {
+    font-size: 22px; font-weight: 300; line-height: 1.5; color: var(--white);
+  }
+  .mission-a-sub {
+    font-size: 15px; font-weight: 400; line-height: 1.65; color: rgba(4,19,101,0.75);
+  }
+  .mission-a-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border);
+  }
+  .mission-a-fact {
+    padding: 28px 28px;
+    background: rgba(255,255,255,0.03);
+    border-right: 1px solid var(--border);
+    transition: background 0.25s;
+  }
+  .mission-a-fact:last-child { border-right: none; }
+  .mission-a-fact:hover { background: rgba(255,255,255,0.07); }
+  .mission-a-fact-tag {
+    font-family: var(--font-head);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--electric); margin-bottom: 10px;
+  }
+  .mission-a-fact p {
+    font-size: 15px; color: var(--muted); line-height: 1.75; font-weight: 300;
+  }
+  @media (max-width: 900px) {
+    .mission-a-hero { grid-template-columns: 1fr; }
+    .mission-a-left { border-right: none; border-bottom: 1px solid var(--border); }
+    .mission-a-strip { grid-template-columns: 1fr 1fr; }
+    .mission-a-fact:nth-child(2) { border-right: none; }
+    .mission-a-fact:nth-child(1),
+    .mission-a-fact:nth-child(2) { border-bottom: 1px solid var(--border); }
+  }
+
+
+  /* OPTION C, engagement & attitude */
+  .optc-shell {
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .optc-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--navy);
+  }
+  .optc-top-left {
+    padding: 36px 40px;
+    background: rgba(255,255,255,0.04);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+  }
+  .optc-top-label {
+    font-family: var(--font-head);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--electric);
+  }
+  .optc-top-title {
+    font-family: var(--font-head);
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--white);
+    letter-spacing: -0.5px;
+  }
+  .optc-top-title em {
+    font-style: normal;
+    color: var(--electric);
+  }
+  .optc-top-right {
+    padding: 36px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+  }
+  .optc-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+    width: fit-content;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .optc-pill:hover {
+    border-color: rgba(160,236,157,0.35);
+    color: var(--white);
+  }
+  .optc-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--electric);
+    flex-shrink: 0;
+  }
+  .optc-bottom {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--border);
+  }
+  .optc-item {
+    padding: 32px 28px;
+    border-right: 1px solid var(--border);
+    background: var(--card-bg);
+    transition: background 0.25s;
+  }
+  .optc-item:last-child { border-right: none; }
+  .optc-item:hover { background: rgba(255,255,255,0.08); }
+  .optc-num {
+    font-family: var(--font-head);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--electric);
+    opacity: 0.7;
+    line-height: 1;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .optc-item h4 {
+    font-family: var(--font-head);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .optc-item p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.75;
+    font-weight: 300;
+  }
+  @media (max-width: 900px) {
+    .optc-top { grid-template-columns: 1fr; }
+    .optc-top-left { border-right: none; border-bottom: 1px solid var(--border); }
+    .optc-bottom { grid-template-columns: 1fr; }
+    .optc-item { border-right: none; border-bottom: 1px solid var(--border); }
+    .optc-item:last-child { border-bottom: none; }
+  }
+
+
+  /* OPTION C nouvelle, engagement & attitude */
+  .optc2-block { border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+  .optc2-head { display: grid; grid-template-columns: auto 1fr; }
+  .optc2-accent {
+    background: var(--electric);
+    padding: 28px 32px;
+    display: flex; flex-direction: column; justify-content: center; gap: 6px;
+    min-width: 220px;
+  }
+  .optc2-accent-label {
+    font-family: var(--font-head);
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(4,19,101,0.5);
+  }
+  .optc2-accent-title {
+    font-family: var(--font-head);
+    font-size: 18px; font-weight: 700; line-height: 1.25;
+    color: #041365;
+  }
+  .optc2-intro {
+    padding: 28px 32px;
+    border-left: 1px solid var(--border);
+    background: rgba(255,255,255,0.04);
+    display: flex; align-items: center;
+  }
+  .optc2-intro p {
+    font-size: 15px; font-weight: 300;
+    color: var(--muted); line-height: 1.7;
+  }
+  .optc2-rows { border-top: 1px solid var(--border); }
+  .optc2-row {
+    display: grid; grid-template-columns: 52px 1fr;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .optc2-row:last-child { border-bottom: none; }
+  .optc2-row:hover { background: rgba(255,255,255,0.04); }
+  .optc2-num {
+    background: rgba(160,236,157,0.06);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-head);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--electric);
+    border-right: 1px solid var(--border);
+  }
+  .optc2-body { padding: 22px 28px; }
+  .optc2-body h4 {
+    font-family: var(--font-head);
+    font-size: 15px; font-weight: 700;
+    color: var(--white); margin-bottom: 6px; line-height: 1.3;
+  }
+  .optc2-body p {
+    font-size: 14px; font-weight: 300;
+    color: var(--muted); line-height: 1.75;
+  }
+  @media (max-width: 700px) {
+    .optc2-head { grid-template-columns: 1fr; }
+    .optc2-intro { border-left: none; border-top: 1px solid var(--border); }
+    .optc2-accent { min-width: unset; }
+  }
+
+  .detail-intro:first-of-type {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+  .detail-intro-group {
+    margin-bottom: 20px;
+  }
+  .detail-intro-group .di-first {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  .detail-intro-group .di-rest {
+    font-family: var(--font-body);
+    font-style: normal;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--muted);
+  }
+  .detail-intro-group .di-rest + .di-rest {
+    margin-top: 0;
+  }
+
+
+
+
+  /* LANG TOGGLE */
+  .lang-toggle {
+    display: flex; align-items: center; gap: 2px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 3px;
+    margin-left: 16px;
+  }
+  .lang-btn {
+    font-family: var(--font-body);
+    font-size: 12px; font-weight: 700;
+    letter-spacing: .08em;
+    padding: 5px 12px;
+    border-radius: 100px;
+    border: none; cursor: pointer;
+    background: transparent;
+    color: var(--muted);
+    transition: all .2s;
+  }
+  .lang-btn.active {
+    background: var(--electric);
+    color: var(--navy);
+  }
+  .lang-btn:not(.active):hover { color: var(--white); }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Brak<span>son</span></a>
+  <div class="nav-links">
+    <a href="#mission">Mission</a>
+    <a href="#values">Valeurs</a>
+    <a href="#quotidien">Quotidien</a>
+    <a href="#worklife">Environnement</a>
+    <a href="#testimonials">Témoignages</a>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+<!-- PAGE 1-2 : HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-photos">
+    <img src="https://cdn.prod.website-files.com/6778120592eed54a4b4cd530/688cc68f905674bbd3fe0475_CHARGEMAP-2000-49.webp" alt="">
+    <img src="https://cdn.prod.website-files.com/6778120592eed54a4b4cd530/688cc6a2984737e60fcd0293_CHARGEMAP-2000-4.webp" alt="">
+    <img src="https://cdn.prod.website-files.com/6778120592eed54a4b4cd530/68b4c8e394b819313f6abf04_CHARGEMAP-2000-30.webp" alt="">
+    <img src="https://cdn.prod.website-files.com/6778120592eed54a4b4cd530/688cc6ca1f3801d9bc1f0b97_CHARGEMAP-2000-8.webp" alt="">
+    <img src="https://cdn.prod.website-files.com/6778120592eed54a4b4cd530/688cc6d60ace84bf643501b2_CHARGEMAP-2000-51.webp" alt="">
+    <img src="https://cdn.prod.website-files.com/6778120592eed54a4b4cd530/68e7aaebe5c8b5237dd228ef_CHARGEMAP-2000-38%20V2.webp" alt="">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag" id="hero-tag">Culture Book</div>
+    <h1 id="hero-h1">Ici, la culture <em>se vit</em> au quotidien</h1>
+    <p class="hero-sub" id="hero-sub">Collaboration continue, communication ouverte, flexibilité et innovation. Au fil de ces pages, découvrez comment nous cultivons un environnement où l'erreur devient une opportunité d'apprendre, où les portes restent ouvertes, et où chacun peut s'épanouir à sa manière.</p>
+    <a href="#mission" class="hero-cta" id="hero-cta">Découvrir notre culture ↓</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</div>
+
+<!-- PAGES 3-4 : MISSION & CULTURE, Option A -->
+<section id="mission">
+  <div class="section-label" id="mission-label">Notre raison d'être</div>
+  <h2 id="mission-h2">Mission & Culture</h2>
+  <p class="section-intro" id="mission-intro">Ce qui nous guide au quotidien, dans les grandes décisions comme dans les petits gestes.</p>
+
+  <div class="mission-a">
+    <div class="mission-a-hero">
+      <div class="mission-a-left">
+        <div class="mission-a-tag" id="mission-tag-left">Notre mission</div>
+        <p class="mission-a-statement" id="mission-statement">Aider la société à passer à des modes de transport et d'énergie plus respectueux de l'environnement.</p>
+      </div>
+      <div class="mission-a-right">
+        <div class="mission-a-tag mission-a-tag--dark" id="mission-tag-right">Vision long terme</div>
+        <p class="mission-a-sub" id="mission-sub">La voiture électrique d'aujourd'hui devient le système de stockage d'énergie de demain. Nous développons des solutions rendant la mobilité électrique accessible à tous, nous diffusons l'information, et éduquons positivement sur les choix énergétiques durables.</p>
+      </div>
+    </div>
+    <div class="mission-a-strip">
+      <div class="mission-a-fact">
+        <div class="mission-a-fact-tag" id="fact1-tag">Notre culture</div>
+        <p id="fact1-text">Nos cinq valeurs ne sont pas des mots sur un mur. Ce sont des choses qu'on vit, qu'on ressent, qu'on retrouve dans les petites décisions du quotidien autant que dans les grandes.</p>
+      </div>
+      <div class="mission-a-fact">
+        <div class="mission-a-fact-tag" id="fact2-tag">Ce qui nous construit</div>
+        <p id="fact2-text">L'envie d'apprendre, la confiance qu'on se fait les uns aux autres, et cette conviction qu'on va plus loin ensemble.</p>
+      </div>
+      <div class="mission-a-fact">
+        <div class="mission-a-fact-tag" id="fact3-tag">Nos valeurs en action</div>
+        <p id="fact3-text">Ces valeurs, on les retrouve dans notre façon de travailler en équipe, de concevoir nos produits, d'accompagner nos utilisateurs, et de contribuer à notre échelle, à un avenir un peu plus durable.</p>
+      </div>
+      <div class="mission-a-fact">
+        <div class="mission-a-fact-tag" id="fact4-tag">Notre impact</div>
+        <p id="fact4-text">Contribuer à notre échelle à un avenir un peu plus durable pour nos équipes, nos utilisateurs, et la société dans son ensemble.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGES 4-9 : NOS CINQ VALEURS -->
+<section id="values">
+  <div class="section-label" id="values-label">Ce qui nous définit</div>
+  <h2 id="values-h2">Nos cinq valeurs</h2>
+  <p class="section-intro" id="values-intro">Cinq valeurs qui guident nos décisions et nos interactions, chaque jour. Cliquez pour en découvrir davantage.</p>
+
+  <div class="values-grid">
+    <div class="value-card" onclick="toggleValue(0)">
+      <div class="value-icon">✦</div>
+      <h3 id="v0-name">Enchanter nos utilisateurs</h3>
+      <div class="tagline" id="v0-tagline">Au-delà des attentes</div>
+    </div>
+    <div class="value-card" onclick="toggleValue(1)">
+      <div class="value-icon">⬡</div>
+      <h3 id="v1-name">Être solidaire</h3>
+      <div class="tagline" id="v1-tagline">Avancer ensemble</div>
+    </div>
+    <div class="value-card" onclick="toggleValue(2)">
+      <div class="value-icon">◈</div>
+      <h3 id="v2-name">Développer la confiance</h3>
+      <div class="tagline" id="v2-tagline">Transparence & fiabilité</div>
+    </div>
+    <div class="value-card" onclick="toggleValue(3)">
+      <div class="value-icon">↑</div>
+      <h3 id="v3-name">Progresser continuellement</h3>
+      <div class="tagline" id="v3-tagline">Toujours évoluer</div>
+    </div>
+    <div class="value-card" onclick="toggleValue(4)">
+      <div class="value-icon">⟡</div>
+      <h3 id="v4-name">Partager les connaissances</h3>
+      <div class="tagline" id="v4-tagline">Vulgariser & enseigner</div>
+    </div>
+  </div>
+
+  <!-- PAGE 5 : Enchanter nos utilisateurs -->
+  <div class="value-detail" id="detail-0">
+    <p class="detail-intro-title" id="d0-title">Nos utilisateurs sont au centre de nos préoccupations et nous mettons tout en œuvre pour qu'ils le restent.</p>
+    <p class="detail-intro-body" id="d0-body">Créer une expérience exceptionnelle qui transforme nos utilisateurs en ambassadeurs du changement. Nous construisons des solutions intuitives, efficaces, adaptées aux différents besoins. Les détails sont très importants : les interactions doivent être pensées pour apporter satisfaction et fluidité pour nos clients, nos lecteurs et nos collaborateurs.
+Nous voulons aller au-delà des attentes.
+Pour les enchanter, il faut d'abord les comprendre.</p>
+    <div class="detail-block">
+      <h4 id="d0-h4-0">Comment on y arrive</h4>
+      <p id="d0-p-0">Nous avons une flotte de véhicules électriques à disposition de nos collaborateurs internes, nous prenons en charge le coût des recharges pour leur permettre d'expérimenter l'utilisation du véhicule électrique. Sur la boutique Mister EV, ils ont accès à des réductions pour faciliter leur équipement.</p>
+    </div>
+    <div class="detail-block">
+      <h4 id="d0-h4-1">Le terrain avant tout</h4>
+      <p id="d0-p-1">Le Chargemap Tour permet de rencontrer les utilisateurs sur le terrain, tout comme les groupes de discussion avec nos ambassadeurs et les forums de nos différents médias. Ce sont ces possibilités proposées à nos équipes qui leur permettent de vivre l'expérience d'un utilisateur et de comprendre ses besoins.</p>
+    </div>
+    <div class="detail-block">
+      <h4 id="d0-h4-2">Feedback utilisateur</h4>
+      <p id="d0-p-2">En interne, nous avons des canaux Slack dédiés : <em>"Voice of the Customer"</em> remonte tous les avis, <em>"General Support"</em> donne la visibilité sur les demandes clients. Des clubs d'utilisateurs ainsi que des enquêtes terrain permettent d'échanger avec les équipes produits, aussi bien chez Chargemap que chez Saabre.</p>
+    </div>
+    <div class="detail-block">
+      <h4 id="d0-h4-3">Engagement → Promotion</h4>
+      <p id="d0-p-3">Les stratégies d'engagement font évoluer l'utilisateur satisfait en promoteur. Nous mettons en avant des témoignages sur notre boutique e-commerce Mister EV et sur Chargemap. Nous fédérons un comité d'ambassadeurs du véhicule électrique.</p>
+    </div>
+  </div>
+
+  <!-- PAGE 6 : Être solidaire -->
+  <div class="value-detail" id="detail-1">
+    <p class="detail-intro-title" id="d1-title">Avancer ensemble en équipe. L'entraide est une valeur clé chez Brakson.</p>
+    <p class="detail-intro-body" id="d1-body">Face aux défis, nous ne restons pas spectateurs, on agit collectivement pour trouver des solutions. Les initiatives individuelles sont importantes, mais c'est uniquement en combinant nos forces et en communiquant que nous serons en mesure d'atteindre nos objectifs.
+Cette solidarité se retrouve dans les équipes où chacun veille à soutenir l'autre, mais aussi à travers un engagement plus large envers les mobilités et énergies durables.</p>
+    <div class="detail-block">
+      <h4 id="d1-h4-0">En cas de crise</h4>
+      <p id="d1-p-0">Nous priorisons les solutions plutôt que de chercher les responsables. Les sessions de résolution de problèmes sont transverses. Lors des pics d'activité, tout le monde est mobilisé : support, expédition de badges, chacun donne un coup de main. L'ownership du problème, c'est simple : celui qui détecte demande, les autres répondent.</p>
+    </div>
+    <div class="detail-block">
+      <h4 id="d1-h4-1">Collaboration transverse</h4>
+      <p id="d1-p-1">Les projets communs entre équipes créent des synergies et renforcent l'impact global. Nous partageons les ressources, organisons des ateliers collectifs de design, d'IA, créons des bases de connaissances communes. Par exemple, la base de données sur les véhicules électriques alimente les médias Automobile Propre, le service support et le planificateur d'itinéraires de Chargemap.</p>
+    </div>
+    <div class="detail-block">
+      <h4 id="d1-h4-2">Entraide spontanée</h4>
+      <p id="d1-p-2">Des boîtes à problèmes pour demander de l'aide, des appels à la solidarité réguliers : cadeaux de Noël, recherche de logement, amélioration de compétences grâce à notre Bourse aux Compétences. Le principe : j'ai un problème, j'en parle, quelqu'un va pouvoir m'apporter des solutions.</p>
+    </div>
+  </div>
+
+  <!-- PAGE 7 : Développer la confiance -->
+  <div class="value-detail" id="detail-2">
+    <p class="detail-intro-title" id="d2-title">La confiance est un pilier essentiel dans notre travail. C'est au travers de plusieurs actions que nous nous engageons concrètement à la développer.</p>
+    <p class="detail-intro-body" id="d2-body">Elle se construit jour après jour, avec de la transparence dans nos échanges, l'importance donnée à la communication et la fiabilité de chacun.
+En interne, elle se traduit par une vraie autonomie laissée aux collaborateurs, avec une direction qui soutient et qui cherche à responsabiliser. Nous avons à cœur d'en faire de même avec nos clients et nos partenaires.
+Nous cultivons au quotidien cette relation de confiance, car sa pérennité repose sur des actions cohérentes et sincères.</p>
+    <div class="detail-block">
+      <h4 id="d2-h4-0">Le droit à l'erreur</h4>
+      <p id="d2-p-0">Les erreurs sont des opportunités d'apprentissage. Si quelque chose ne fonctionne pas, la question n'est pas "qui ?" mais "pourquoi ?" et "qu'est-ce qu'on fera différemment la prochaine fois ?" Chaque échec est une leçon qui nous mène au succès.</p>
+    </div>
+    <div class="detail-block">
+      <h4 id="d2-h4-1">La culture du feedback</h4>
+      <p id="d2-p-1">Des entretiens one-on-one entre managers et collaborateurs, des sondages anonymes sur la QVCT, un feedback 360° dans les entretiens annuels. Des points semestriels permettent de voir comment se passe l'activité et d'accompagner nos objectifs. La parole est partagée entre le manager et le collaborateur.</p>
+    </div>
+    <div class="detail-block">
+      <h4 id="d2-h4-2">L'expression libre</h4>
+      <p id="d2-p-2">Toutes les perspectives comptent dans les prises de décision collectives, idéalement indépendamment de la position hiérarchique. Les Kickstart trimestriels intègrent toujours des sessions de questions-réponses. On multiplie les occasions pour que chacun puisse s'exprimer. Équipe RH, CSE, managers : plusieurs portes, toujours ouvertes.</p>
+    </div>
+  </div>
+
+  <!-- PAGE 8 : Progresser continuellement -->
+  <div class="value-detail" id="detail-3">
+    <p class="detail-intro-title" id="d3-title">Progresser continuellement doit être au cœur de notre dynamique. Nous sommes motivés par l'envie d'apprendre, de nous réinventer et de toujours évoluer.</p>
+    <p class="detail-intro-body" id="d3-body">C'est certes une question d'ambition, mais c'est surtout une question de sens. Chaque expérience est une occasion de grandir, d'innover, d'affiner notre savoir-faire. Cette culture de l'évolution, où chaque collaborateur est encouragé à explorer de nouvelles voies, est vraiment ancrée.</p>
+    <div class="detail-block">
+      <h4 id="d3-h4-0">30 % du budget entreprise dédié à la formation</h4>
+      <p id="d3-p-0">Sur les deux dernières années (2024–2025), c'est l'investissement consacré au développement des équipes. Catalogue de formations externes, tech days récurrents pour expérimenter, partages réguliers des innovations du marché sur nos canaux internes. Et dès l'arrivée, une formation sur l'électromobilité pour comprendre les enjeux de notre secteur.</p>
+    </div>
+    <div class="detail-block">
+      <h4 id="d3-h4-1">Progresser, c'est aussi partager</h4>
+      <p id="d3-p-1">Après une formation, un compte rendu en interne est attendu. Pas pour contrôler, mais pour que ce savoir individuel devienne un savoir collectif.</p>
+    </div>
+    <div class="detail-block">
+      <h4 id="d3-h4-2">Notre impact environnemental</h4>
+      <p id="d3-p-2">Au-delà de l'apprentissage, il y a l'initiative personnelle. Calcul d'empreinte carbone personnelle et d'entreprise, forfait mobilités douces de 300 € par an, promotion du covoiturage en interne. On déploie le maximum d'initiatives pour réduire notre impact environnemental.</p>
+    </div>
+  </div>
+
+  <!-- PAGE 9 : Partager les connaissances -->
+  <div class="value-detail" id="detail-4">
+    <p class="detail-intro-title" id="d4-title">Le partage du savoir fait partie de notre ADN : vulgariser, expliquer, enseigner.</p>
+    <p class="detail-intro-body" id="d4-body">Partager les connaissances fait écho à progresser continuellement. Nous aimons rendre l'information accessible et utile, aussi bien en interne qu'auprès de nos utilisateurs ou des audiences de nos médias. Nous savons que la transmission du savoir accélère les transformations.
+Il ne faut jamais s'arrêter, nous sommes dans un secteur qui se développe vite. Lorsqu'on apprend quelque chose, ce ne doit pas être un savoir individuel, ça doit devenir un savoir collectif.</p>
+    <div class="detail-block">
+      <h4 id="d4-h4-0">Documentation et partage d'expertise</h4>
+      <p id="d4-p-0">Notre espace Notion centralise tout. Des ateliers de partage d'expertise inter-sociétés sur le marketing, le design, le produit. Nos wikis internes sont accessibles à tous, pour comprendre et s'améliorer. L'accès à l'information est donné aussi bien en écriture qu'en lecture.</p>
+    </div>
+    <div class="detail-block">
+      <h4 id="d4-h4-1">Formation interne</h4>
+      <p id="d4-p-1">Bourse de formation où chaque collaborateur peut suivre ou proposer. Catalogue en libre accès. Système de bourse aux compétences et de mentorat. De plus en plus de formations internes sont animées par des experts du groupe : propriété intellectuelle, mobilité électrique…</p>
+    </div>
+  </div>
+</section>
+
+<!-- PAGES 10-13 : LA CULTURE DU TRAVAIL (photos + comportements) -->
+<section id="quotidien">
+  <div class="section-label" id="quotidien-label">Notre quotidien</div>
+  <h2 id="quotidien-h2">L'esprit Brakson</h2>
+  <p class="section-intro" id="quotidien-intro">Des équipes qui ont de l'impact, des humains qui travaillent ensemble avec passion.</p>
+  <div class="photos-grid">
+    <div class="photo-item">
+      <img src="https://cdn.prod.website-files.com/6778120592eed54a4b4cd530/68c42eb2e86dc57769e5bdc9_CHARGEMAP-2000-04.webp" alt="Équipe Brakson" style="object-fit: cover; object-position: 35% 30%;">
+    </div>
+    <div class="photo-item">
+      <img src="https://cdn.prod.website-files.com/6778120592eed54a4b4cd530/688cc8db0397ac38ffe989b9_CHARGEMAP-2000-56.webp" alt="Collaboration">
+    </div>
+    <div class="photo-item">
+      <img src="https://cdn.prod.website-files.com/6778120592eed54a4b4cd530/688cc8db72b8060ccce81206_CHARGEMAP-2000-1.webp" alt="Innovation">
+    </div>
+    <div class="photo-item">
+      <img src="https://cdn.prod.website-files.com/6778120592eed54a4b4cd530/688cc8db0397ac38ffe989b4_CHARGEMAP-2000-48.webp" alt="Esprit d'équipe">
+    </div>
+    <div class="photo-item">
+      <img src="https://cdn.prod.website-files.com/6778120592eed54a4b4cd530/688cc68f905674bbd3fe0475_CHARGEMAP-2000-49.webp" alt="Brakson team">
+    </div>
+  </div>
+
+  <!-- PAGE 10 : La culture du travail -->
+  <div class="culture-block">
+    <div class="section-label" style="margin-top:64px;" id="travail-label">La culture du travail</div>
+    <h2 style="margin-bottom:16px;" id="travail-h2">Comment ça se passe vraiment</h2>
+    <p class="section-intro" style="margin-bottom:32px;" id="travail-intro">Les anecdotes, exemples et témoignages qui suivent ont été partagés par les collaborateurs de Brakson eux-mêmes. Pas de mise en scène, juste la réalité du quotidien, racontée par ceux qui la vivent.</p>
+    <div class="anecdote-card">
+      <span class="anecdote-label" id="anec-label">Anecdote</span>
+      <p id="anec-text">Lors de son premier jour, Antoine a mis un de nos médias hors service. Résultat ? Une solution trouvée collectivement, des éclats de rire, et un nouveau venu qui a pris ses marques sans traumatisme. Ici, on préfère résoudre ensemble plutôt que pointer du doigt.</p>
+    </div>
+    <div class="behavior-grid">
+      <div class="behavior-card">
+        <h4 id="bc1-h4">Une collaboration sans prise de tête</h4>
+        <p id="bc1-p">L'erreur est une occasion d'apprendre, jamais un prétexte à blâmer. Et côté réunions ? Si elles n'ont pas de but clair ou les bonnes personnes, elles passent à la trappe. Pas de réunionite chez nous.</p>
+      </div>
+      <div class="behavior-card">
+        <h4 id="bc2-h4">Parler à tout le monde (et facilement)</h4>
+        <p id="bc2-p">Les portes sont toujours ouvertes, même symboliquement. Que ce soit un collègue, un manager ou même le directeur, tout le monde peut échanger sans stress. Notre CEO Yoann prend le temps d'expliquer ses projets en détail.</p>
+      </div>
+      <div class="behavior-card">
+        <h4 id="bc3-h4">Flexibilité : parce qu'on n'est pas des machines</h4>
+        <p id="bc3-p">Chaque collaborateur a sa vie et ses contraintes, et chez Brakson, on le respecte. Déménagement, besoins spécifiques ? On adapte les règles de télétravail. On travaille avec des humains. Ça change tout.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 11 : L'engagement envers l'entreprise, Option C nouvelle -->
+  <div class="culture-block" style="margin-top:64px;">
+    <div class="optc2-block">
+      <div class="optc2-head">
+        <div class="optc2-accent">
+          <div class="optc2-accent-label" id="eng-label">L'engagement envers l'entreprise</div>
+          <div class="optc2-accent-title" id="eng-title">S'impliquer vraiment,<br>dès le premier jour</div>
+        </div>
+        <div class="optc2-intro">
+          <p id="eng-intro">Les valeurs s'incarnent dès le premier jour chez Brakson, à travers des actions concrètes et un onboarding pensé pour créer du lien entre équipes et entre filiales.</p>
+        </div>
+      </div>
+      <div class="optc2-rows">
+        <div class="optc2-row">
+          <div class="optc2-num" id="eng-n1">01</div>
+          <div class="optc2-body">
+            <h4 id="eng-h1">Pas question de rester dans sa "case"</h4>
+            <p id="eng-p1">Quand on arrive chez Brakson, l'onboarding inclut une tournée des services pour découvrir les enjeux transverses. Bonus pour les amateurs d'écologie : une grande part des salariés roule en électrique, vient à vélo ou en transports en commun.</p>
+          </div>
+        </div>
+        <div class="optc2-row">
+          <div class="optc2-num" id="eng-n2">02</div>
+          <div class="optc2-body">
+            <h4 id="eng-h2">L'entraide, c'est notre crédo</h4>
+            <p id="eng-p2">Quand il y a besoin d'un coup de main, tout le monde s'y met. Lorsqu'il a fallu développer un outil utile à plusieurs équipes, les compétences se sont croisées naturellement entre les différentes sociétés du groupe. Ici, personne n'hésite à lever la main.</p>
+          </div>
+        </div>
+        <div class="optc2-row">
+          <div class="optc2-num" id="eng-n3">03</div>
+          <div class="optc2-body">
+            <h4 id="eng-h3">Des valeurs qui se vivent, pas qui se récitent</h4>
+            <p id="eng-p3">On ne vous demandera jamais de réciter un manifeste corporate. Les valeurs s'incarnent au quotidien, à travers des actions concrètes. Dès le recrutement, le fit humain est prioritaire : des gens curieux, réfléchis et capables de se remettre en question.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 13 : L'attitude au travail, Option C nouvelle -->
+  <div class="culture-block" style="margin-top:64px;">
+    <div class="optc2-block">
+      <div class="optc2-head">
+        <div class="optc2-accent">
+          <div class="optc2-accent-label" id="att-label">L'attitude au travail</div>
+          <div class="optc2-accent-title" id="att-title">Tester, partager,<br>progresser ensemble</div>
+        </div>
+        <div class="optc2-intro">
+          <p id="att-intro">Une culture de l'expérimentation, du feedback et des synergies entre équipes, au quotidien, pas seulement en réunion.</p>
+        </div>
+      </div>
+      <div class="optc2-rows">
+        <div class="optc2-row">
+          <div class="optc2-num" id="att-n1">01</div>
+          <div class="optc2-body">
+            <h4 id="att-h1">Tester, tenter, oser, même si c'est imparfait</h4>
+            <p id="att-p1">On encourage les idées, même celles qui ne sont pas encore parfaitement ficelées. Les tech-days, organisés un vendredi sur deux, sont des journées où tout est permis : tester un processus, améliorer un vieux code, explorer une piste. Si tout n'est pas terminé ? Pas grave, on aura avancé.</p>
+          </div>
+        </div>
+        <div class="optc2-row">
+          <div class="optc2-num" id="att-n2">02</div>
+          <div class="optc2-body">
+            <h4 id="att-h2">Le feedback, c'est la clé</h4>
+            <p id="att-p2">Les managers prennent régulièrement des retours des équipes et n'hésitent pas à en donner. Cette culture de l'échange s'étend même aux utilisateurs finaux, pour s'assurer que les produits répondent vraiment à leurs besoins. On écoute, on ajuste.</p>
+          </div>
+        </div>
+        <div class="optc2-row">
+          <div class="optc2-num" id="att-n3">03</div>
+          <div class="optc2-body">
+            <h4 id="att-h3">Synergies qui boostent tout le monde</h4>
+            <p id="att-p3">Un outil utile développé par une équipe ? Il sera probablement partagé avec d'autres filiales. Exemple : un outil de monitoring SEO conçu chez Saabre a été adapté pour Chargemap. On partage les ressources et on progresse ensemble.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 14 : L'ENVIRONNEMENT DE TRAVAIL -->
+<section id="worklife">
+  <div class="section-label" id="wl-label">L'environnement de travail</div>
+  <h2>Un cadre pensé<br>pour bien travailler</h2>
+  <p class="section-intro">Parce qu'on travaille avec des humains. Ça change tout.</p>
+  <div class="cards-row">
+    <div class="wl-card">
+      <div class="wl-num" id="wl1-num">01</div>
+      <h3 id="wl1-h3">Choisissez votre mode</h3>
+      <p id="wl1-p">Flexoffice, télétravail ou bureau classique : chez Brakson, chacun s'organise comme il veut. L'important, c'est d'être à l'aise et efficace. Déménagement, besoins spécifiques ? On adapte, on trouve ensemble ce qui fonctionne.</p>
+    </div>
+    <div class="wl-card">
+      <div class="wl-num" id="wl2-num">02</div>
+      <h3 id="wl2-h3">L'innovation, une seconde nature</h3>
+      <p id="wl2-p">Brakson ne reste jamais sur ses acquis. Un groupe de réflexion explore en permanence les nouvelles technologies, l'intelligence artificielle notamment. Si ça colle, on intègre. Sinon, on passe à autre chose. Pas de pression : juste une curiosité permanente, collective et assumée.</p>
+    </div>
+    <div class="wl-card">
+      <div class="wl-num" id="wl3-num">03</div>
+      <h3 id="wl3-h3">30 % pour ta formation</h3>
+      <p id="wl3-p">Sur 2024–2025, c'est l'investissement consacré au développement des équipes. Catalogue de formations externes, tech days récurrents pour expérimenter, partages réguliers des innovations du marché sur nos canaux internes.</p>
+    </div>
+    <div class="wl-card">
+      <div class="wl-num" id="wl4-num">04</div>
+      <h3 id="wl4-h3">Impact dès le premier jour</h3>
+      <p id="wl4-p">L'onboarding inclut une tournée des services pour découvrir les enjeux transverses. Les valeurs s'incarnent au quotidien à travers des actions concrètes. Dès le recrutement, le fit humain est prioritaire.</p>
+    </div>
+    <div class="wl-card">
+      <div class="wl-num" id="wl5-num">05</div>
+      <h3 id="wl5-h3">Mobilité verte</h3>
+      <p id="wl5-p">Flotte de véhicules électriques à disposition, forfait mobilités douces de 300 € par an, promotion du covoiturage. Une grande part des salariés roule en électrique, vient à vélo ou en transports en commun.</p>
+    </div>
+    <div class="wl-card">
+      <div class="wl-num" id="wl6-num">06</div>
+      <h3 id="wl6-h3">Tech Days & expérimentation</h3>
+      <p id="wl6-p">Les tech-days, organisés un vendredi sur deux, sont des journées où tout est permis : tester un processus, améliorer un vieux code, explorer une piste nouvelle. Si tout n'est pas terminé ? Pas grave, on aura avancé.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 15 : ILS ONT LA PAROLE (témoignages en dernier comme dans le PDF) -->
+<section id="testimonials">
+  <div class="section-label" id="testi-label">Ils ont la parole</div>
+  <h2 id="testi-h2">Ce qu'ils disent de Brakson</h2>
+  <p class="section-intro" id="testi-intro">Les anecdotes, exemples et témoignages qui suivent ont été partagés par les collaborateurs de Brakson eux-mêmes. Pas de mise en scène, juste la réalité du quotidien, racontée par ceux qui la vivent.</p>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <span class="quote-mark">"</span>
+      <blockquote id="t1-q">Ce que j'apprécie dans mon rôle ? Accompagner les clients tout en contribuant directement au développement de l'entreprise. Ce que je fais a un <strong>impact concret</strong>, et c'est une source de motivation quotidienne.</blockquote>
+      <div class="testimonial-author">
+        <div class="author-avatar">JM</div>
+        <div class="author-info">
+          <strong id="t1-name">Juliette</strong>
+          <span id="t1-role">Business Developer, Chargemap</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <span class="quote-mark">"</span>
+      <blockquote id="t2-q">Dès mon arrivée, j'ai été frappé par l'<strong>esprit d'entraide</strong> qui règne chez Brakson. Ici, personne ne reste enfermé dans son périmètre, les équipes collaborent pour trouver des solutions ensemble. Un contraste fort avec les environnements plus cloisonnés des grandes entreprises.</blockquote>
+      <div class="testimonial-author">
+        <div class="author-avatar">MA</div>
+        <div class="author-info">
+          <strong id="t2-name">Madjid</strong>
+          <span id="t2-role">Product Owner, Chargemap</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <span class="quote-mark">"</span>
+      <blockquote id="t3-q">L'ADN de Brakson repose sur deux piliers : la <strong>confiance</strong> et l'<strong>écoute</strong>. Chacun peut s'exprimer, challenger la direction et proposer de nouvelles idées. Ce que j'apprécie particulièrement ? La réactivité dans la prise de décision.</blockquote>
+      <div class="testimonial-author">
+        <div class="author-avatar">BE</div>
+        <div class="author-info">
+          <strong id="t3-name">Benjamin</strong>
+          <span id="t3-role">Directeur Commercial, Chargemap</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <span class="quote-mark">"</span>
+      <blockquote id="t4-q">Brakson, c'est une entreprise à l'état d'esprit <strong>jeune et dynamique</strong>, ce qui est rare. La confiance accordée, les opportunités de formation, l'accompagnement dans l'évolution pro. Et surtout : le <strong>bien-être des équipes</strong> pris au sérieux.</blockquote>
+      <div class="testimonial-author">
+        <div class="author-avatar">LA</div>
+        <div class="author-info">
+          <strong id="t4-name">Laura</strong>
+          <span id="t4-role">Chargée d'exploitation, Chargemap</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Brak<span>son</span></div>
+  <p id="footer-sub">Aider la société à passer à des énergies et des modes de transport plus respectueux de l'environnement.</p>
+</footer>
+
+<script>
+  let activeValue = -1;
+
+  function toggleValue(idx) {
+    const cards = document.querySelectorAll('.value-card');
+    const details = document.querySelectorAll('.value-detail');
+    
+    if (activeValue === idx) {
+      cards[idx].classList.remove('active');
+      details[idx].classList.remove('show');
+      activeValue = -1;
+      return;
+    }
+    
+    cards.forEach(c => c.classList.remove('active'));
+    details.forEach(d => d.classList.remove('show'));
+    
+    cards[idx].classList.add('active');
+    details[idx].classList.add('show');
+    activeValue = idx;
+    
+    details[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // Animate numbers on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.wl-card, .testimonial-card, .value-card, .mission-cell').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = `opacity 0.5s ease ${i * 0.06}s, transform 0.5s ease ${i * 0.06}s, border-color 0.3s, background 0.3s`;
+    observer.observe(el);
+  });
+</script>
+
+
+<script>
+var FR = {
+  "nav-mission":"Mission","nav-values":"Valeurs","nav-quotidien":"Quotidien","nav-worklife":"Environnement","nav-testimonials":"T\u00e9moignages",
+  "hero-tag":"Culture Book",
+  "hero-h1":"Ici, la culture <em>se vit</em> au quotidien",
+  "hero-sub":"Collaboration continue, communication ouverte, flexibilit\u00e9 et innovation. Au fil de ces pages, d\u00e9couvrez comment nous cultivons un environnement o\u00f9 l\u2019erreur devient une opportunit\u00e9 d\u2019apprendre, o\u00f9 les portes restent ouvertes, et o\u00f9 chacun peut s\u2019\u00e9panouir \u00e0 sa mani\u00e8re.",
+  "hero-cta":"D\u00e9couvrir notre culture \u2193",
+  "mission-label":"Notre raison d\u2019\u00eatre","mission-h2":"Mission & Culture","mission-intro":"Ce qui nous guide au quotidien, dans les grandes d\u00e9cisions comme dans les petits gestes.",
+  "mission-tag-left":"Notre mission","mission-statement":"Aider la soci\u00e9t\u00e9 \u00e0 passer \u00e0 des modes de transport et d\u2019\u00e9nergie plus respectueux de l\u2019environnement.",
+  "mission-tag-right":"Vision long terme","mission-sub":"La voiture \u00e9lectrique d\u2019aujourd\u2019hui devient le syst\u00e8me de stockage d\u2019\u00e9nergie de demain. Nous d\u00e9veloppons des solutions rendant la mobilit\u00e9 \u00e9lectrique accessible \u00e0 tous, nous diffusons l\u2019information, et \u00e9duquons positivement sur les choix \u00e9nerg\u00e9tiques durables.",
+  "fact1-tag":"Notre culture","fact1-text":"Nos cinq valeurs ne sont pas des mots sur un mur. Ce sont des choses qu\u2019on vit, qu\u2019on ressent, qu\u2019on retrouve dans les petites d\u00e9cisions du quotidien autant que dans les grandes.",
+  "fact2-tag":"Ce qui nous construit","fact2-text":"L\u2019envie d\u2019apprendre, la confiance qu\u2019on se fait les uns aux autres, et cette conviction qu\u2019on va plus loin ensemble.",
+  "fact3-tag":"Nos valeurs en action","fact3-text":"Ces valeurs, on les retrouve dans notre fa\u00e7on de travailler en \u00e9quipe, de concevoir nos produits, d\u2019accompagner nos utilisateurs, et de contribuer \u00e0 notre \u00e9chelle, \u00e0 un avenir un peu plus durable.",
+  "fact4-tag":"Notre impact","fact4-text":"Contribuer \u00e0 notre \u00e9chelle \u00e0 un avenir un peu plus durable pour nos \u00e9quipes, nos utilisateurs, et la soci\u00e9t\u00e9 dans son ensemble.",
+  "values-label":"Ce qui nous d\u00e9finit","values-h2":"Nos cinq valeurs","values-intro":"Cinq valeurs qui guident nos d\u00e9cisions et nos interactions, chaque jour. Cliquez pour en d\u00e9couvrir davantage.",
+  "v0-name":"Enchanter nos utilisateurs","v0-tagline":"Au-del\u00e0 des attentes",
+  "v1-name":"\u00catre solidaire","v1-tagline":"Avancer ensemble",
+  "v2-name":"D\u00e9velopper la confiance","v2-tagline":"Transparence & fiabilit\u00e9",
+  "v3-name":"Progresser continuellement","v3-tagline":"Toujours \u00e9voluer",
+  "v4-name":"Partager les connaissances","v4-tagline":"Vulgariser & enseigner",
+  "d0-title":"Nos utilisateurs sont au centre de nos pr\u00e9occupations et nous mettons tout en \u0153uvre pour qu\u2019ils le restent.",
+  "d0-body":"Cr\u00e9er une exp\u00e9rience exceptionnelle qui transforme nos utilisateurs en ambassadeurs du changement. Nous construisons des solutions intuitives, efficaces, adapt\u00e9es aux diff\u00e9rents besoins. Les d\u00e9tails sont tr\u00e8s importants : les interactions doivent \u00eatre pens\u00e9es pour apporter satisfaction et fluidit\u00e9 pour nos clients, nos lecteurs et nos collaborateurs.\nNous voulons aller au-del\u00e0 des attentes.\nPour les enchanter, il faut d\u2019abord les comprendre.",
+  "d0-h4-0":"Comment on y arrive","d0-p-0":"Nous avons une flotte de v\u00e9hicules \u00e9lectriques \u00e0 disposition de nos collaborateurs internes, nous prenons en charge le co\u00fbt des recharges pour leur permettre d\u2019exp\u00e9rimenter l\u2019utilisation du v\u00e9hicule \u00e9lectrique. Sur la boutique Mister EV, ils ont acc\u00e8s \u00e0 des r\u00e9ductions pour faciliter leur \u00e9quipement.",
+  "d0-h4-1":"Le terrain avant tout","d0-p-1":"Le Chargemap Tour permet de rencontrer les utilisateurs sur le terrain, tout comme les groupes de discussion avec nos ambassadeurs et les forums de nos diff\u00e9rents m\u00e9dias. Ce sont ces possibilit\u00e9s propos\u00e9es \u00e0 nos \u00e9quipes qui leur permettent de vivre l\u2019exp\u00e9rience d\u2019un utilisateur et de comprendre ses besoins.",
+  "d0-h4-2":"Feedback utilisateur","d0-p-2":"En interne, nous avons des canaux Slack d\u00e9di\u00e9s : \u00ab\u00a0Voice of the Customer\u00a0\u00bb remonte tous les avis, \u00ab\u00a0General Support\u00a0\u00bb donne la visibilit\u00e9 sur les demandes clients. Des clubs d\u2019utilisateurs ainsi que des enqu\u00eates terrain permettent d\u2019\u00e9changer avec les \u00e9quipes produits, aussi bien chez Chargemap que chez Saabre.",
+  "d0-h4-3":"Engagement \u2192 Promotion","d0-p-3":"Les strat\u00e9gies d\u2019engagement font \u00e9voluer l\u2019utilisateur satisfait en promoteur. Nous mettons en avant des t\u00e9moignages sur notre boutique e-commerce Mister EV et sur Chargemap. Nous f\u00e9d\u00e9rons un comit\u00e9 d\u2019ambassadeurs du v\u00e9hicule \u00e9lectrique.",
+  "d1-title":"Avancer ensemble en \u00e9quipe. L\u2019entraide est une valeur cl\u00e9 chez Brakson.",
+  "d1-body":"Face aux d\u00e9fis, nous ne restons pas spectateurs, on agit collectivement pour trouver des solutions. Les initiatives individuelles sont importantes, mais c\u2019est uniquement en combinant nos forces et en communiquant que nous serons en mesure d\u2019atteindre nos objectifs.\nCette solidarit\u00e9 se retrouve dans les \u00e9quipes o\u00f9 chacun veille \u00e0 soutenir l\u2019autre, mais aussi \u00e0 travers un engagement plus large envers les mobilit\u00e9s et \u00e9nergies durables.",
+  "d1-h4-0":"En cas de crise","d1-p-0":"Nous priorisons les solutions plut\u00f4t que de chercher les responsables. Les sessions de r\u00e9solution de probl\u00e8mes sont transverses. Lors des pics d\u2019activit\u00e9, tout le monde est mobilis\u00e9 : support, exp\u00e9dition de badges, chacun donne un coup de main. L\u2019ownership du probl\u00e8me, c\u2019est simple : celui qui d\u00e9tecte demande, les autres r\u00e9pondent.",
+  "d1-h4-1":"Collaboration transverse","d1-p-1":"Les projets communs entre \u00e9quipes cr\u00e9ent des synergies et renforcent l\u2019impact global. Nous partageons les ressources, organisons des ateliers collectifs de design, d\u2019IA, cr\u00e9ons des bases de connaissances communes. Par exemple, la base de donn\u00e9es sur les v\u00e9hicules \u00e9lectriques alimente les m\u00e9dias Automobile Propre, le service support et le planificateur d\u2019itin\u00e9raires de Chargemap.",
+  "d1-h4-2":"Entraide spontan\u00e9e","d1-p-2":"Des bo\u00eetes \u00e0 probl\u00e8mes pour demander de l\u2019aide, des appels \u00e0 la solidarit\u00e9 r\u00e9guliers : cadeaux de No\u00ebl, recherche de logement, am\u00e9lioration de comp\u00e9tences gr\u00e2ce \u00e0 notre Bourse aux Comp\u00e9tences. Le principe : j\u2019ai un probl\u00e8me, j\u2019en parle, quelqu\u2019un va pouvoir m\u2019apporter des solutions.",
+  "d2-title":"La confiance est un pilier essentiel dans notre travail. C\u2019est au travers de plusieurs actions que nous nous engageons concr\u00e8tement \u00e0 la d\u00e9velopper.",
+  "d2-body":"\u00c9lle se construit jour apr\u00e8s jour, avec de la transparence dans nos \u00e9changes, l\u2019importance donn\u00e9e \u00e0 la communication et la fiabilit\u00e9 de chacun.\nEn interne, elle se traduit par une vraie autonomie laiss\u00e9e aux collaborateurs, avec une direction qui soutient et qui cherche \u00e0 responsabiliser. Nous avons \u00e0 c\u0153ur d\u2019en faire de m\u00eame avec nos clients et nos partenaires.\nNous cultivons au quotidien cette relation de confiance, car sa p\u00e9rennit\u00e9 repose sur des actions coh\u00e9rentes et sinc\u00e8res.",
+  "d2-h4-0":"Le droit \u00e0 l\u2019erreur","d2-p-0":"Les erreurs sont des opportunit\u00e9s d\u2019apprentissage. Si quelque chose ne fonctionne pas, la question n\u2019est pas \u00ab\u00a0qui\u00a0?\u00a0\u00bb mais \u00ab\u00a0pourquoi\u00a0?\u00a0\u00bb et \u00ab\u00a0qu\u2019est-ce qu\u2019on fera diff\u00e9remment la prochaine fois\u00a0?\u00a0\u00bb Chaque \u00e9chec est une le\u00e7on qui nous m\u00e8ne au succ\u00e8s.",
+  "d2-h4-1":"La culture du feedback","d2-p-1":"Des entretiens one-on-one entre managers et collaborateurs, des sondages anonymes sur la QVCT, un feedback 360\u00b0 dans les entretiens annuels. Des points semestriels permettent de voir comment se passe l\u2019activit\u00e9 et d\u2019accompagner nos objectifs. La parole est partag\u00e9e entre le manager et le collaborateur.",
+  "d2-h4-2":"L\u2019expression libre","d2-p-2":"Toutes les perspectives comptent dans les prises de d\u00e9cision collectives, id\u00e9alement ind\u00e9pendamment de la position hi\u00e9rarchique. Les Kickstart trimestriels int\u00e8grent toujours des sessions de questions-r\u00e9ponses. On multiplie les occasions pour que chacun puisse s\u2019exprimer. \u00c9quipe RH, CSE, managers : plusieurs portes, toujours ouvertes.",
+  "d3-title":"Progresser continuellement doit \u00eatre au c\u0153ur de notre dynamique. Nous sommes motiv\u00e9s par l\u2019envie d\u2019apprendre, de nous r\u00e9inventer et de toujours \u00e9voluer.",
+  "d3-body":"C\u2019est certes une question d\u2019ambition, mais c\u2019est surtout une question de sens. Chaque exp\u00e9rience est une occasion de grandir, d\u2019innover, d\u2019affiner notre savoir-faire. Cette culture de l\u2019\u00e9volution, o\u00f9 chaque collaborateur est encourag\u00e9 \u00e0 explorer de nouvelles voies, est vraiment ancr\u00e9e.",
+  "d3-h4-0":"30 % du budget entreprise d\u00e9di\u00e9 \u00e0 la formation","d3-p-0":"Sur les deux derni\u00e8res ann\u00e9es (2024\u20132025), c\u2019est l\u2019investissement consacr\u00e9 au d\u00e9veloppement des \u00e9quipes. Catalogue de formations externes, tech days r\u00e9currents pour exp\u00e9rimenter, partages r\u00e9guliers des innovations du march\u00e9 sur nos canaux internes. Et d\u00e8s l\u2019arriv\u00e9e, une formation sur l\u2019\u00e9lectromobilit\u00e9 pour comprendre les enjeux de notre secteur.",
+  "d3-h4-1":"Progresser, c\u2019est aussi partager","d3-p-1":"Apr\u00e8s une formation, un compte rendu en interne est attendu. Pas pour contr\u00f4ler, mais pour que ce savoir individuel devienne un savoir collectif.",
+  "d3-h4-2":"Notre impact environnemental","d3-p-2":"Au-del\u00e0 de l\u2019apprentissage, il y a l\u2019initiative personnelle. Calcul d\u2019empreinte carbone personnelle et d\u2019entreprise, forfait mobilit\u00e9s douces de 300 \u20ac par an, promotion du covoiturage en interne. On d\u00e9ploie le maximum d\u2019initiatives pour r\u00e9duire notre impact environnemental.",
+  "d4-title":"Le partage du savoir fait partie de notre ADN : vulgariser, expliquer, enseigner.",
+  "d4-body":"Partager les connaissances fait \u00e9cho \u00e0 progresser continuellement. Nous aimons rendre l\u2019information accessible et utile, aussi bien en interne qu\u2019aupr\u00e8s de nos utilisateurs ou des audiences de nos m\u00e9dias. Nous savons que la transmission du savoir acc\u00e9l\u00e8re les transformations.\nIl ne faut jamais s\u2019arr\u00eater, nous sommes dans un secteur qui se d\u00e9veloppe vite. Lorsqu\u2019on apprend quelque chose, ce ne doit pas \u00eatre un savoir individuel, \u00e7a doit devenir un savoir collectif.",
+  "d4-h4-0":"Documentation et partage d\u2019expertise","d4-p-0":"Notre espace Notion centralise tout. Des ateliers de partage d\u2019expertise inter-soci\u00e9t\u00e9s sur le marketing, le design, le produit. Nos wikis internes sont accessibles \u00e0 tous, pour comprendre et s\u2019am\u00e9liorer. L\u2019acc\u00e8s \u00e0 l\u2019information est donn\u00e9 aussi bien en \u00e9criture qu\u2019en lecture.",
+  "d4-h4-1":"Formation interne","d4-p-1":"Bourse de formation o\u00f9 chaque collaborateur peut suivre ou proposer. Catalogue en libre acc\u00e8s. Syst\u00e8me de bourse aux comp\u00e9tences et de mentorat. De plus en plus de formations internes sont anim\u00e9es par des experts du groupe : propri\u00e9t\u00e9 intellectuelle, mobilit\u00e9 \u00e9lectrique\u2026",
+  "quotidien-label":"Notre quotidien","quotidien-h2":"L\u2019esprit Brakson","quotidien-intro":"Des \u00e9quipes qui ont de l\u2019impact, des humains qui travaillent ensemble avec passion.",
+  "pl-1":"L\u2019\u00e9quipe au travail","pl-2":"Collaboration","pl-3":"Innovation","pl-4":"Esprit d\u2019\u00e9quipe","pl-5":"Brakson",
+  "travail-label":"La culture du travail","travail-h2":"Comment \u00e7a se passe vraiment","travail-intro":"Les anecdotes, exemples et t\u00e9moignages qui suivent ont \u00e9t\u00e9 partag\u00e9s par les collaborateurs de Brakson eux-m\u00eames. Pas de mise en sc\u00e8ne, juste la r\u00e9alit\u00e9 du quotidien, racont\u00e9e par ceux qui la vivent.",
+  "anec-label":"Anecdote","anec-text":"Lors de son premier jour, Antoine a mis un de nos m\u00e9dias hors service. R\u00e9sultat ? Une solution trouv\u00e9e collectivement, des \u00e9clats de rire, et un nouveau venu qui a pris ses marques sans traumatisme. Ici, on pr\u00e9f\u00e8re r\u00e9soudre ensemble plut\u00f4t que pointer du doigt.",
+  "bc1-h4":"Une collaboration sans prise de t\u00eate","bc1-p":"L\u2019erreur est une occasion d\u2019apprendre, jamais un pr\u00e9texte \u00e0 bl\u00e2mer. Et c\u00f4t\u00e9 r\u00e9unions ? Si elles n\u2019ont pas de but clair ou les bonnes personnes, elles passent \u00e0 la trappe. Pas de r\u00e9unionite chez nous.",
+  "bc2-h4":"Parler \u00e0 tout le monde (et facilement)","bc2-p":"Les portes sont toujours ouvertes, m\u00eame symboliquement. Que ce soit un coll\u00e8gue, un manager ou m\u00eame le directeur, tout le monde peut \u00e9changer sans stress. Notre CEO Yoann prend le temps d\u2019expliquer ses projets en d\u00e9tail.",
+  "bc3-h4":"Flexibilit\u00e9 : parce qu\u2019on n\u2019est pas des machines","bc3-p":"Chaque collaborateur a sa vie et ses contraintes, et chez Brakson, on le respecte. D\u00e9m\u00e9nagement, besoins sp\u00e9cifiques ? On adapte les r\u00e8gles de t\u00e9l\u00e9travail. On travaille avec des humains. \u00c7a change tout.",
+  "eng-label":"L\u2019engagement envers l\u2019entreprise","eng-title":"S\u2019impliquer <em>vraiment</em>,<br>d\u00e8s le premier jour","eng-intro":"Les valeurs s\u2019incarnent d\u00e8s le premier jour chez Brakson, \u00e0 travers des actions concr\u00e8tes et un onboarding pens\u00e9 pour cr\u00e9er du lien entre \u00e9quipes et entre filiales.",
+  "eng-n1":"01","eng-h1":"Pas question de rester dans sa \u00ab\u00a0case\u00a0\u00bb","eng-p1":"Quand on arrive chez Brakson, l\u2019onboarding inclut une tourn\u00e9e des services pour d\u00e9couvrir les enjeux transverses. Bonus pour les amateurs d\u2019\u00e9cologie : une grande part des salari\u00e9s roule en \u00e9lectrique, vient \u00e0 v\u00e9lo ou en transports en commun.",
+  "eng-n2":"02","eng-h2":"L\u2019entraide, c\u2019est notre cr\u00e9do","eng-p2":"Quand il y a besoin d\u2019un coup de main, tout le monde s\u2019y met. Lorsqu\u2019il a fallu d\u00e9velopper un outil utile \u00e0 plusieurs \u00e9quipes, les comp\u00e9tences se sont crois\u00e9es naturellement entre les diff\u00e9rentes soci\u00e9t\u00e9s du groupe. Ici, personne n\u2019h\u00e9site \u00e0 lever la main.",
+  "eng-n3":"03","eng-h3":"Des valeurs qui se vivent, pas qui se r\u00e9citent","eng-p3":"On ne vous demandera jamais de r\u00e9citer un manifeste corporate. Les valeurs s\u2019incarnent au quotidien, \u00e0 travers des actions concr\u00e8tes. D\u00e8s le recrutement, le fit humain est prioritaire : des gens curieux, r\u00e9fl\u00e9chis et capables de se remettre en question.",
+  "att-label":"L\u2019attitude au travail","att-title":"Tester, partager,<br><em>progresser ensemble</em>","att-intro":"Une culture de l\u2019exp\u00e9rimentation, du feedback et des synergies entre \u00e9quipes, au quotidien, pas seulement en r\u00e9union.",
+  "att-n1":"01","att-h1":"Tester, tenter, oser, m\u00eame si c\u2019est imparfait","att-p1":"On encourage les id\u00e9es, m\u00eame celles qui ne sont pas encore parfaitement ficel\u00e9es. Les tech-days, organis\u00e9s un vendredi sur deux, sont des journ\u00e9es o\u00f9 tout est permis : tester un processus, am\u00e9liorer un vieux code, explorer une piste. Si tout n\u2019est pas termin\u00e9 ? Pas grave, on aura avanc\u00e9.",
+  "att-n2":"02","att-h2":"Le feedback, c\u2019est la cl\u00e9","att-p2":"Les managers prennent r\u00e9guli\u00e8rement des retours des \u00e9quipes et n\u2019h\u00e9sitent pas \u00e0 en donner. Cette culture de l\u2019\u00e9change s\u2019\u00e9tend m\u00eame aux utilisateurs finaux, pour s\u2019assurer que les produits r\u00e9pondent vraiment \u00e0 leurs besoins. On \u00e9coute, on ajuste.",
+  "att-n3":"03","att-h3":"Synergies qui boostent tout le monde","att-p3":"Un outil utile d\u00e9velopp\u00e9 par une \u00e9quipe ? Il sera probablement partag\u00e9 avec d\u2019autres filiales. Exemple : un outil de monitoring SEO con\u00e7u chez Saabre a \u00e9t\u00e9 adapt\u00e9 pour Chargemap. On partage les ressources et on progresse ensemble.",
+  "wl-label":"L\u2019environnement de travail","wl-h2":"Un cadre pens\u00e9 pour<br>bien travailler","wl-intro":"Parce qu\u2019on travaille avec des humains. \u00c7a change tout.",
+  "wl1-num":"01","wl1-h3":"Choisissez votre mode","wl1-p":"Flexoffice, t\u00e9l\u00e9travail ou bureau classique : chez Brakson, chacun s\u2019organise comme il veut. L\u2019important, c\u2019est d\u2019\u00eatre \u00e0 l\u2019aise et efficace. D\u00e9m\u00e9nagement, besoins sp\u00e9cifiques ? On adapte, on trouve ensemble ce qui fonctionne.",
+  "wl2-num":"02","wl2-h3":"L\u2019innovation, une seconde nature","wl2-p":"Brakson ne reste jamais sur ses acquis. Un groupe de r\u00e9flexion explore en permanence les nouvelles technologies, l\u2019intelligence artificielle notamment. Si \u00e7a colle, on int\u00e8gre. Sinon, on passe \u00e0 autre chose. Pas de pression : juste une curiosit\u00e9 permanente, collective et assum\u00e9e.",
+  "wl3-num":"03","wl3-h3":"30 % pour ta formation","wl3-p":"Sur 2024\u20132025, c\u2019est l\u2019investissement consacr\u00e9 au d\u00e9veloppement des \u00e9quipes. Catalogue de formations externes, tech days r\u00e9currents pour exp\u00e9rimenter, partages r\u00e9guliers des innovations du march\u00e9 sur nos canaux internes.",
+  "wl4-num":"04","wl4-h3":"Impact d\u00e8s le premier jour","wl4-p":"L\u2019onboarding inclut une tourn\u00e9e des services pour d\u00e9couvrir les enjeux transverses. Les valeurs s\u2019incarnent au quotidien \u00e0 travers des actions concr\u00e8tes. D\u00e8s le recrutement, le fit humain est prioritaire.",
+  "wl5-num":"05","wl5-h3":"Mobilit\u00e9 verte","wl5-p":"Flotte de v\u00e9hicules \u00e9lectriques \u00e0 disposition, forfait mobilit\u00e9s douces de 300 \u20ac par an, promotion du covoiturage. Une grande part des salari\u00e9s roule en \u00e9lectrique, vient \u00e0 v\u00e9lo ou en transports en commun.",
+  "wl6-num":"06","wl6-h3":"Tech Days & exp\u00e9rimentation","wl6-p":"Les tech-days, organis\u00e9s un vendredi sur deux, sont des journ\u00e9es o\u00f9 tout est permis : tester un processus, am\u00e9liorer un vieux code, explorer une piste nouvelle. Si tout n\u2019est pas termin\u00e9 ? Pas grave, on aura avanc\u00e9.",
+  "testi-label":"Ils ont la parole","testi-h2":"Ce qu\u2019ils disent de Brakson","testi-intro":"Les anecdotes, exemples et t\u00e9moignages qui suivent ont \u00e9t\u00e9 partag\u00e9s par les collaborateurs de Brakson eux-m\u00eames. Pas de mise en sc\u00e8ne, juste la r\u00e9alit\u00e9 du quotidien, racont\u00e9e par ceux qui la vivent.",
+  "t1-q":"Ce que j\u2019appr\u00e9cie dans mon r\u00f4le ? Accompagner les clients tout en contribuant directement au d\u00e9veloppement de l\u2019entreprise. Ce que je fais a un <strong>impact concret</strong>, et c\u2019est une source de motivation quotidienne.","t1-name":"Juliette","t1-role":"Business Developer \u2014 Chargemap",
+  "t2-q":"D\u00e8s mon arriv\u00e9e, j\u2019ai \u00e9t\u00e9 frapp\u00e9 par l\u2019<strong>esprit d\u2019entraide</strong> qui r\u00e8gne chez Brakson. Ici, personne ne reste enferm\u00e9 dans son p\u00e9rim\u00e8tre, les \u00e9quipes collaborent pour trouver des solutions ensemble. Un contraste fort avec les environnements plus cloisonn\u00e9s des grandes entreprises.","t2-name":"Madjid","t2-role":"Product Owner \u2014 Chargemap",
+  "t3-q":"L\u2019ADN de Brakson repose sur deux piliers : la <strong>confiance</strong> et l\u2019<strong>\u00e9coute</strong>. Chacun peut s\u2019exprimer, challenger la direction et proposer de nouvelles id\u00e9es. Ce que j\u2019appr\u00e9cie particuli\u00e8rement ? La r\u00e9activit\u00e9 dans la prise de d\u00e9cision.","t3-name":"Benjamin","t3-role":"Directeur Commercial \u2014 Chargemap",
+  "t4-q":"Brakson, c\u2019est une entreprise \u00e0 l\u2019\u00e9tat d\u2019esprit <strong>jeune et dynamique</strong>, ce qui est rare. La confiance accord\u00e9e, les opportunit\u00e9s de formation, l\u2019accompagnement dans l\u2019\u00e9volution pro. Et surtout : le <strong>bien-\u00eatre des \u00e9quipes</strong> pris au s\u00e9rieux.","t4-name":"Laura","t4-role":"Charg\u00e9e d\u2019exploitation \u2014 Chargemap",
+  "footer-sub":"Aider la soci\u00e9t\u00e9 \u00e0 passer \u00e0 des \u00e9nergies et des modes de transport plus respectueux de l\u2019environnement."
+};
+
+var EN = {
+  "nav-mission":"Mission","nav-values":"Values","nav-quotidien":"Daily Life","nav-worklife":"Environment","nav-testimonials":"Testimonials",
+  "hero-tag":"Culture Book",
+  "hero-h1":"Here, culture is <em>lived</em> every day",
+  "hero-sub":"Continuous collaboration, open communication, flexibility and innovation. Through these pages, discover how we cultivate an environment where mistakes become opportunities to learn, where doors stay open, and where everyone can thrive in their own way.",
+  "hero-cta":"Discover our culture \u2193",
+  "mission-label":"Our purpose","mission-h2":"Mission & Culture","mission-intro":"What guides us every day, in big decisions and small gestures alike.",
+  "mission-tag-left":"Our mission","mission-statement":"Helping society transition to more environmentally friendly modes of transport and energy.",
+  "mission-tag-right":"Long-term vision","mission-sub":"Today's electric car becomes tomorrow's energy storage system. We develop solutions making electric mobility accessible to all, spread information, and positively educate on sustainable energy choices.",
+  "fact1-tag":"Our culture","fact1-text":"Our five values are not words on a wall. They are things we live, feel, and find in the small everyday decisions as much as in the big ones.",
+  "fact2-tag":"What built us","fact2-text":"The desire to learn, the trust we place in each other, and the conviction that we go further together.",
+  "fact3-tag":"Our values in action","fact3-text":"These values show up in how we work as a team, design our products, support our users, and contribute at our scale to a more sustainable future.",
+  "fact4-tag":"Our impact","fact4-text":"Contributing at our scale to a slightly more sustainable future for our teams, our users, and society as a whole.",
+  "values-label":"What defines us","values-h2":"Our five values","values-intro":"Five values that guide our decisions and interactions, every day. Click to learn more.",
+  "v0-name":"Delight our users","v0-tagline":"Beyond expectations",
+  "v1-name":"Be a team player","v1-tagline":"Moving forward together",
+  "v2-name":"Build trust","v2-tagline":"Transparency & reliability",
+  "v3-name":"Keep improving","v3-tagline":"Always evolving",
+  "v4-name":"Share knowledge","v4-tagline":"Simplify & teach",
+  "d0-title":"Our users are at the heart of everything we do and we spare no effort to keep them there.",
+  "d0-body":"Creating an exceptional experience that turns our users into ambassadors for change. We build intuitive, efficient solutions tailored to different needs. Details matter: every interaction must be designed to bring satisfaction and ease to our clients, readers, and colleagues.\nWe want to go beyond expectations.\nTo delight them, we must first understand them.",
+  "d0-h4-0":"How we do it","d0-p-0":"We have a fleet of electric vehicles available to our employees, covering the cost of charging so they can experience EV use first-hand. On the Mister EV store, they get discounts to make equipping themselves easier.",
+  "d0-h4-1":"Field first","d0-p-1":"The Chargemap Tour lets us meet users in person, alongside discussion groups with our ambassadors and forums across our media. These opportunities allow our teams to live the user experience and truly understand their needs.",
+  "d0-h4-2":"User feedback","d0-p-2":"Internally, we have dedicated Slack channels: Voice of the Customer collects all reviews, General Support gives visibility on client requests. User clubs and field surveys enable product team exchanges at both Chargemap and Saabre.",
+  "d0-h4-3":"Engagement to Advocacy","d0-p-3":"Engagement strategies turn satisfied users into promoters. We highlight testimonials on our Mister EV e-commerce store and on Chargemap, and we build an electric vehicle ambassador community.",
+  "d1-title":"Moving forward as a team. Mutual support is a core value at Brakson.",
+  "d1-body":"When faced with challenges, we don\u2019t stand by, we act collectively to find solutions. Individual initiatives matter, but only by combining our strengths and communicating can we reach our goals.\nThis solidarity shows up in teams where everyone looks out for each other, as well as through a broader commitment to sustainable mobility and energy.",
+  "d1-h4-0":"In times of crisis","d1-p-0":"We prioritise solutions over assigning blame. Problem-solving sessions are cross-functional. During peak activity, everyone pitches in: support, badge shipping, whatever is needed. Problem ownership is simple: whoever spots it asks, everyone responds.",
+  "d1-h4-1":"Cross-team collaboration","d1-p-1":"Shared projects create synergies and strengthen our overall impact. We share resources, run collective design and AI workshops, and build shared knowledge bases. For example, our EV database feeds Automobile Propre media, customer support, and Chargemap's route planner.",
+  "d1-h4-2":"Spontaneous support","d1-p-2":"Problem boxes for asking for help, regular solidarity calls: Christmas gifts, housing searches, skill-building through our Skills Exchange. The principle: I have a problem, I say so, someone will find a solution.",
+  "d2-title":"Trust is an essential pillar of our work. We actively commit to building it through concrete actions.",
+  "d2-body":"It is built day after day, through transparency in our exchanges, the importance we place on communication, and everyone\u2019s reliability.\nInternally, it means giving employees real autonomy, with leadership that supports and empowers. We aim to do the same with our clients and partners.\nWe nurture this trust relationship daily, because its longevity depends on consistent and sincere actions.",
+  "d2-h4-0":"The right to fail","d2-p-0":"Mistakes are learning opportunities. If something doesn\u2019t work, the question isn\u2019t who? but why? and what will we do differently next time? Every failure is a lesson that leads us to success.",
+  "d2-h4-1":"A culture of feedback","d2-p-1":"One-on-one meetings between managers and employees, anonymous wellbeing surveys, 360 feedback in annual reviews. Bi-annual check-ins track how things are going and how we can support our goals. The floor is shared between manager and employee.",
+  "d2-h4-2":"Free expression","d2-p-2":"All perspectives count in collective decisions, ideally regardless of hierarchical position. Quarterly Kickstarts always include Q&A sessions. We multiply opportunities for everyone to speak up. HR team, Works Council, managers: multiple doors, always open.",
+  "d3-title":"Continuous improvement must be at the heart of our dynamic. We are driven by the desire to learn, reinvent ourselves, and always evolve.",
+  "d3-body":"It\u2019s certainly a matter of ambition, but above all a matter of purpose. Every experience is an opportunity to grow, innovate, and refine our expertise. This culture of evolution, where every employee is encouraged to explore new paths, is deeply embedded.",
+  "d3-h4-0":"30% of the company budget dedicated to training","d3-p-0":"Over the past two years (2024\u20132025), this is the investment made in team development. External training catalogues, recurring tech days to experiment, regular market innovation sharing on internal channels. And from day one, training on electromobility to understand the stakes of our sector.",
+  "d3-h4-1":"Improving means sharing too","d3-p-1":"After training, an internal summary is expected. Not to monitor, but to turn individual knowledge into collective knowledge.",
+  "d3-h4-2":"Our environmental impact","d3-p-2":"Beyond learning, there is personal initiative. Personal and company carbon footprint calculation, a 300 EUR per year sustainable mobility allowance, internal carpooling promotion. We deploy the maximum of initiatives to reduce our environmental impact.",
+  "d4-title":"Sharing knowledge is part of our DNA: simplify, explain, teach.",
+  "d4-body":"Sharing knowledge echoes continuous improvement. We love making information accessible and useful, both internally and for our users and media audiences. We know that knowledge transfer accelerates transformation.\nWe can never stop, we operate in a fast-moving sector. When we learn something, it must not remain individual knowledge, it must become collective knowledge.",
+  "d4-h4-0":"Documentation & expertise sharing","d4-p-0":"Our Notion space centralises everything. Cross-company expertise sharing workshops on marketing, design, and product. Internal wikis accessible to all, in read and write mode, to understand and improve.",
+  "d4-h4-1":"Internal training","d4-p-1":"A training marketplace where every employee can attend or propose sessions. Open-access catalogue. Skills exchange and mentoring system. More and more internal training is led by in-house experts: intellectual property, electric mobility.",
+  "quotidien-label":"Our daily life","quotidien-h2":"The Brakson spirit","quotidien-intro":"Teams that make an impact, people working together with passion.",
+  "pl-1":"The team at work","pl-2":"Collaboration","pl-3":"Innovation","pl-4":"Team spirit","pl-5":"Brakson",
+  "travail-label":"Work culture","travail-h2":"What it\u2019s really like","travail-intro":"The anecdotes, examples and testimonials below were shared by Brakson employees themselves. No staging, just the reality of daily life, told by those who live it.",
+  "anec-label":"Story","anec-text":"On his first day, Antoine took one of our media outlets offline. The result? A solution found collectively, lots of laughter, and a newcomer who found his footing without any trauma. Here, we prefer to solve together rather than point fingers.",
+  "bc1-h4":"Stress-free collaboration","bc1-p":"Mistakes are a chance to learn, never a reason to blame. As for meetings? If they don\u2019t have a clear purpose or the right people, they get cancelled. No meeting overload here.",
+  "bc2-h4":"Talk to anyone (easily)","bc2-p":"Doors are always open, even figuratively. Whether it\u2019s a colleague, a manager, or even the director, everyone can exchange freely. Our CEO Yoann takes the time to explain his projects in detail.",
+  "bc3-h4":"Flexibility: because we\u2019re not machines","bc3-p":"Every employee has their own life and constraints, and at Brakson, we respect that. Moving house, specific needs? We adapt the remote work rules. We work with humans. That changes everything.",
+  "eng-label":"Company commitment","eng-title":"Getting <em>truly</em> involved,<br>from day one","eng-intro":"Values come to life from day one at Brakson, through concrete actions and an onboarding designed to create connections between teams and subsidiaries.",
+  "eng-n1":"01","eng-h1":"No staying in your lane","eng-p1":"When joining Brakson, onboarding includes a tour of departments to discover cross-functional challenges. Bonus for eco-minded people: a large share of employees drive electric, cycle, or use public transport.",
+  "eng-n2":"02","eng-h2":"Helping each other is our motto","eng-p2":"When help is needed, everyone pitches in. When an internal tool needed to serve multiple teams, skills naturally crossed between different group companies. No one hesitates to raise their hand.",
+  "eng-n3":"03","eng-h3":"Values lived, not recited","eng-p3":"We will never ask you to recite a corporate manifesto. Values are lived daily through concrete actions. From recruitment, the human fit comes first: curious, thoughtful people who can question themselves.",
+  "att-label":"Work attitude","att-title":"Test, share,<br><em>improve together</em>","att-intro":"A culture of experimentation, feedback, and cross-team synergies, every day, not just in meetings.",
+  "att-n1":"01","att-h1":"Test, try, dare, even if it\u2019s imperfect","att-p1":"We encourage ideas, even those not yet fully formed. Tech-days, every other Friday, are days where anything goes: test a process, improve old code, explore a lead. If it\u2019s not finished? No problem, we\u2019ll have made progress.",
+  "att-n2":"02","att-h2":"Feedback is key","att-p2":"Managers regularly gather team feedback and aren\u2019t afraid to give it. This exchange culture extends to end users, to ensure products truly meet their needs. We listen, we adjust.",
+  "att-n3":"03","att-h3":"Synergies that boost everyone","att-p3":"A useful tool developed by one team? It will likely be shared with other subsidiaries. Example: an SEO monitoring tool built at Saabre was adapted for Chargemap. We share resources and progress together.",
+  "wl-label":"Work environment","wl-h2":"A framework designed for<br>working well","wl-intro":"Because we work with humans. That changes everything.",
+  "wl1-num":"01","wl1-h3":"Choose your mode","wl1-p":"Flex office, remote, or classic office: at Brakson, everyone organises as they wish. What matters is being comfortable and effective. Moving house, specific needs? We adapt and find what works together.",
+  "wl2-num":"02","wl2-h3":"Innovation, a second nature","wl2-p":"Brakson never rests on its laurels. A dedicated group constantly explores new technologies, especially AI. If it fits, we integrate it. If not, we move on. No pressure: just permanent, collective, and assumed curiosity.",
+  "wl3-num":"03","wl3-h3":"30% for your development","wl3-p":"In 2024\u20132025, this is the investment dedicated to team development. External training catalogue, recurring tech days to experiment, regular market innovation sharing on internal channels.",
+  "wl4-num":"04","wl4-h3":"Impact from day one","wl4-p":"Onboarding includes a department tour to discover cross-functional challenges. Values are lived daily through concrete actions. From recruitment, the human fit comes first.",
+  "wl5-num":"05","wl5-h3":"Green mobility","wl5-p":"A fleet of electric vehicles available, a 300 EUR per year sustainable mobility allowance, internal carpooling promotion. A large share of employees drive electric, cycle, or use public transport.",
+  "wl6-num":"06","wl6-h3":"Tech Days & experimentation","wl6-p":"Tech-days, every other Friday, are days where anything goes: test a process, improve old code, explore a new lead. If it\u2019s not finished? No problem, we\u2019ll have made progress.",
+  "testi-label":"They speak","testi-h2":"What they say about Brakson","testi-intro":"The anecdotes, examples and testimonials below were shared by Brakson employees themselves. No staging, just the reality of daily life, told by those who live it.",
+  "t1-q":"What do I love about my role? Supporting clients while directly contributing to the company\u2019s growth. What I do has a <strong>real impact</strong>, and that\u2019s a daily source of motivation.","t1-name":"Juliette","t1-role":"Business Developer \u2014 Chargemap",
+  "t2-q":"From day one, I was struck by the <strong>team spirit</strong> at Brakson. No one stays siloed, teams collaborate to find solutions together. A stark contrast with the more compartmentalised environments of large companies.","t2-name":"Madjid","t2-role":"Product Owner \u2014 Chargemap",
+  "t3-q":"Brakson\u2019s DNA rests on two pillars: <strong>trust</strong> and <strong>listening</strong>. Everyone can speak up, challenge leadership, and propose new ideas. What I appreciate most? The speed of decision-making.","t3-name":"Benjamin","t3-role":"Commercial Director \u2014 Chargemap",
+  "t4-q":"Brakson is a company with a <strong>young, dynamic</strong> mindset, which is rare. The trust given, training opportunities, professional development support. And above all: <strong>employee wellbeing</strong> taken seriously.","t4-name":"Laura","t4-role":"Operations Manager \u2014 Chargemap",
+  "footer-sub":"Helping society transition to more environmentally friendly modes of transport and energy."
+};
+
+var TRANSLATIONS = {fr: FR, en: EN};
+
+function setLang(lang) {
+  var t = TRANSLATIONS[lang];
+  document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+  function s(id, key, asHtml) {
+    var el = document.getElementById(id);
+    if (el && t[key] !== undefined) {
+      if (asHtml) { el.innerHTML = t[key]; } else { el.textContent = t[key]; }
+    }
+  }
+
+  s('nav-mission','nav-mission'); s('nav-values','nav-values'); s('nav-quotidien','nav-quotidien');
+  s('nav-worklife','nav-worklife'); s('nav-testimonials','nav-testimonials');
+  s('hero-tag','hero-tag'); s('hero-h1','hero-h1',true); s('hero-sub','hero-sub'); s('hero-cta','hero-cta',true);
+  s('mission-label','mission-label'); s('mission-h2','mission-h2'); s('mission-intro','mission-intro');
+  s('mission-tag-left','mission-tag-left'); s('mission-statement','mission-statement');
+  s('mission-tag-right','mission-tag-right'); s('mission-sub','mission-sub');
+  s('fact1-tag','fact1-tag'); s('fact1-text','fact1-text');
+  s('fact2-tag','fact2-tag'); s('fact2-text','fact2-text');
+  s('fact3-tag','fact3-tag'); s('fact3-text','fact3-text');
+  s('fact4-tag','fact4-tag'); s('fact4-text','fact4-text');
+  s('values-label','values-label'); s('values-h2','values-h2'); s('values-intro','values-intro');
+  for (var i=0;i<5;i++) {
+    s('v'+i+'-name','v'+i+'-name'); s('v'+i+'-tagline','v'+i+'-tagline');
+    s('d'+i+'-title','d'+i+'-title'); s('d'+i+'-body','d'+i+'-body');
+    for (var j=0;j<6;j++) {
+      if (t['d'+i+'-h4-'+j]!==undefined) { s('d'+i+'-h4-'+j,'d'+i+'-h4-'+j); s('d'+i+'-p-'+j,'d'+i+'-p-'+j); }
+    }
+  }
+  s('quotidien-label','quotidien-label'); s('quotidien-h2','quotidien-h2'); s('quotidien-intro','quotidien-intro');
+  for (var k=1;k<=5;k++) s('pl-'+k,'pl-'+k);
+  s('travail-label','travail-label'); s('travail-h2','travail-h2',true); s('travail-intro','travail-intro');
+  s('anec-label','anec-label'); s('anec-text','anec-text');
+  for (var m=1;m<=3;m++) { s('bc'+m+'-h4','bc'+m+'-h4'); s('bc'+m+'-p','bc'+m+'-p'); }
+  s('eng-label','eng-label'); s('eng-title','eng-title',true); s('eng-intro','eng-intro');
+  for (var n=1;n<=3;n++) { s('eng-n'+n,'eng-n'+n); s('eng-h'+n,'eng-h'+n); s('eng-p'+n,'eng-p'+n); }
+  s('att-label','att-label'); s('att-title','att-title',true); s('att-intro','att-intro');
+  for (var p=1;p<=3;p++) { s('att-n'+p,'att-n'+p); s('att-h'+p,'att-h'+p); s('att-p'+p,'att-p'+p); }
+  s('wl-label','wl-label'); s('wl-h2','wl-h2',true); s('wl-intro','wl-intro');
+  for (var q=1;q<=6;q++) { s('wl'+q+'-num','wl'+q+'-num'); s('wl'+q+'-h3','wl'+q+'-h3'); s('wl'+q+'-p','wl'+q+'-p'); }
+  s('testi-label','testi-label'); s('testi-h2','testi-h2'); s('testi-intro','testi-intro');
+  for (var r=1;r<=4;r++) { s('t'+r+'-q','t'+r+'-q',true); s('t'+r+'-name','t'+r+'-name'); s('t'+r+'-role','t'+r+'-role'); }
+  s('footer-sub','footer-sub');
+}
+</script>
+</body>
+</html>
