@@ -931,11 +931,11 @@
 <nav>
   <a class="nav-logo" href="#">Brak<span>son</span></a>
   <div class="nav-links">
-    <a href="#mission">Mission</a>
-    <a href="#values">Valeurs</a>
-    <a href="#quotidien">Quotidien</a>
-    <a href="#worklife">Environnement</a>
-    <a href="#testimonials">Témoignages</a>
+    <a href="#mission" id="nav-mission">Mission</a>
+    <a href="#values" id="nav-values">Valeurs</a>
+    <a href="#quotidien" id="nav-quotidien">Quotidien</a>
+    <a href="#worklife" id="nav-worklife">Environnement</a>
+    <a href="#testimonials" id="nav-testimonials">Témoignages</a>
   </div>
   <div class="lang-toggle">
     <button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">FR</button>
@@ -959,11 +959,10 @@
     <div class="hero-tag" id="hero-tag">Culture Book</div>
     <h1 id="hero-h1">Ici, la culture <em>se vit</em> au quotidien</h1>
     <p class="hero-sub" id="hero-sub">Collaboration continue, communication ouverte, flexibilité et innovation. Au fil de ces pages, découvrez comment nous cultivons un environnement où l'erreur devient une opportunité d'apprendre, où les portes restent ouvertes, et où chacun peut s'épanouir à sa manière.</p>
-    <a href="#mission" class="hero-cta" id="hero-cta">Découvrir notre culture ↓</a>
+    <a href="#mission" class="hero-cta" id="hero-cta">Découvrir notre culture</a>
   </div>
   <div class="hero-scroll">
     <div class="scroll-line"></div>
-    <span>Scroll</span>
   </div>
 </div>
 
@@ -1259,8 +1258,8 @@ Il ne faut jamais s'arrêter, nous sommes dans un secteur qui se développe vite
 <!-- PAGE 14 : L'ENVIRONNEMENT DE TRAVAIL -->
 <section id="worklife">
   <div class="section-label" id="wl-label">L'environnement de travail</div>
-  <h2>Un cadre pensé<br>pour bien travailler</h2>
-  <p class="section-intro">Parce qu'on travaille avec des humains. Ça change tout.</p>
+  <h2 id="wl-h2">Un cadre pensé<br>pour bien travailler</h2>
+  <p class="section-intro" id="wl-intro">Parce qu'on travaille avec des humains. Ça change tout.</p>
   <div class="cards-row">
     <div class="wl-card">
       <div class="wl-num" id="wl1-num">01</div>
@@ -1402,7 +1401,7 @@ var FR = {
   "hero-tag":"Culture Book",
   "hero-h1":"Ici, la culture <em>se vit</em> au quotidien",
   "hero-sub":"Collaboration continue, communication ouverte, flexibilit\u00e9 et innovation. Au fil de ces pages, d\u00e9couvrez comment nous cultivons un environnement o\u00f9 l\u2019erreur devient une opportunit\u00e9 d\u2019apprendre, o\u00f9 les portes restent ouvertes, et o\u00f9 chacun peut s\u2019\u00e9panouir \u00e0 sa mani\u00e8re.",
-  "hero-cta":"D\u00e9couvrir notre culture \u2193",
+  "hero-cta":"D\u00e9couvrir notre culture",
   "mission-label":"Notre raison d\u2019\u00eatre","mission-h2":"Mission & Culture","mission-intro":"Ce qui nous guide au quotidien, dans les grandes d\u00e9cisions comme dans les petits gestes.",
   "mission-tag-left":"Notre mission","mission-statement":"Aider la soci\u00e9t\u00e9 \u00e0 passer \u00e0 des modes de transport et d\u2019\u00e9nergie plus respectueux de l\u2019environnement.",
   "mission-tag-right":"Vision long terme","mission-sub":"La voiture \u00e9lectrique d\u2019aujourd\u2019hui devient le syst\u00e8me de stockage d\u2019\u00e9nergie de demain. Nous d\u00e9veloppons des solutions rendant la mobilit\u00e9 \u00e9lectrique accessible \u00e0 tous, nous diffusons l\u2019information, et \u00e9duquons positivement sur les choix \u00e9nerg\u00e9tiques durables.",
@@ -1476,7 +1475,7 @@ var EN = {
   "hero-tag":"Culture Book",
   "hero-h1":"Here, culture is <em>lived</em> every day",
   "hero-sub":"Continuous collaboration, open communication, flexibility and innovation. Through these pages, discover how we cultivate an environment where mistakes become opportunities to learn, where doors stay open, and where everyone can thrive in their own way.",
-  "hero-cta":"Discover our culture \u2193",
+  "hero-cta":"Discover our culture",
   "mission-label":"Our purpose","mission-h2":"Mission & Culture","mission-intro":"What guides us every day, in big decisions and small gestures alike.",
   "mission-tag-left":"Our mission","mission-statement":"Helping society transition to more environmentally friendly modes of transport and energy.",
   "mission-tag-right":"Long-term vision","mission-sub":"Today's electric car becomes tomorrow's energy storage system. We develop solutions making electric mobility accessible to all, spread information, and positively educate on sustainable energy choices.",
