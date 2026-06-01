@@ -159,14 +159,10 @@
   }
   .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(160,236,157,0.3); }
   .hero-scroll {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    margin-top: 11px;
     color: var(--muted);
     font-size: 12px;
     letter-spacing: 1.5px;
@@ -300,7 +296,7 @@
     font-weight: 700;
     line-height: 1.3;
     margin-bottom: 0;
-    color: var(--white);
+    color: var(--electric);
   }
   .value-card .tagline {
     font-size: 12px;
@@ -960,9 +956,9 @@
     <h1 id="hero-h1">Ici, la culture <em>se vit</em> au quotidien</h1>
     <p class="hero-sub" id="hero-sub">Collaboration continue, communication ouverte, flexibilité et innovation. Au fil de ces pages, découvrez comment nous cultivons un environnement où l'erreur devient une opportunité d'apprendre, où les portes restent ouvertes, et où chacun peut s'épanouir à sa manière.</p>
     <a href="#mission" class="hero-cta" id="hero-cta">Découvrir notre culture</a>
-  </div>
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+    </div>
   </div>
 </div>
 
@@ -1258,7 +1254,7 @@ Il ne faut jamais s'arrêter, nous sommes dans un secteur qui se développe vite
 <!-- PAGE 14 : L'ENVIRONNEMENT DE TRAVAIL -->
 <section id="worklife">
   <div class="section-label" id="wl-label">L'environnement de travail</div>
-  <h2 id="wl-h2">Un cadre pensé<br>pour bien travailler</h2>
+  <h2 id="wl-h2" style="white-space: nowrap;">Un cadre pensé pour bien travailler</h2>
   <p class="section-intro" id="wl-intro">Parce qu'on travaille avec des humains. Ça change tout.</p>
   <div class="cards-row">
     <div class="wl-card">
@@ -1455,7 +1451,7 @@ var FR = {
   "att-n1":"01","att-h1":"Tester, tenter, oser, m\u00eame si c\u2019est imparfait","att-p1":"On encourage les id\u00e9es, m\u00eame celles qui ne sont pas encore parfaitement ficel\u00e9es. Les tech-days, organis\u00e9s un vendredi sur deux, sont des journ\u00e9es o\u00f9 tout est permis : tester un processus, am\u00e9liorer un vieux code, explorer une piste. Si tout n\u2019est pas termin\u00e9 ? Pas grave, on aura avanc\u00e9.",
   "att-n2":"02","att-h2":"Le feedback, c\u2019est la cl\u00e9","att-p2":"Les managers prennent r\u00e9guli\u00e8rement des retours des \u00e9quipes et n\u2019h\u00e9sitent pas \u00e0 en donner. Cette culture de l\u2019\u00e9change s\u2019\u00e9tend m\u00eame aux utilisateurs finaux, pour s\u2019assurer que les produits r\u00e9pondent vraiment \u00e0 leurs besoins. On \u00e9coute, on ajuste.",
   "att-n3":"03","att-h3":"Synergies qui boostent tout le monde","att-p3":"Un outil utile d\u00e9velopp\u00e9 par une \u00e9quipe ? Il sera probablement partag\u00e9 avec d\u2019autres filiales. Exemple : un outil de monitoring SEO con\u00e7u chez Saabre a \u00e9t\u00e9 adapt\u00e9 pour Chargemap. On partage les ressources et on progresse ensemble.",
-  "wl-label":"L\u2019environnement de travail","wl-h2":"Un cadre pens\u00e9 pour<br>bien travailler","wl-intro":"Parce qu\u2019on travaille avec des humains. \u00c7a change tout.",
+  "wl-label":"L\u2019environnement de travail","wl-h2":"Un cadre pens\u00e9 pour bien travailler","wl-intro":"Parce qu\u2019on travaille avec des humains. \u00c7a change tout.",
   "wl1-num":"01","wl1-h3":"Choisissez votre mode","wl1-p":"Flexoffice, t\u00e9l\u00e9travail ou bureau classique : chez Brakson, chacun s\u2019organise comme il veut. L\u2019important, c\u2019est d\u2019\u00eatre \u00e0 l\u2019aise et efficace. D\u00e9m\u00e9nagement, besoins sp\u00e9cifiques ? On adapte, on trouve ensemble ce qui fonctionne.",
   "wl2-num":"02","wl2-h3":"L\u2019innovation, une seconde nature","wl2-p":"Brakson ne reste jamais sur ses acquis. Un groupe de r\u00e9flexion explore en permanence les nouvelles technologies, l\u2019intelligence artificielle notamment. Si \u00e7a colle, on int\u00e8gre. Sinon, on passe \u00e0 autre chose. Pas de pression : juste une curiosit\u00e9 permanente, collective et assum\u00e9e.",
   "wl3-num":"03","wl3-h3":"30 % pour ta formation","wl3-p":"Sur 2024\u20132025, c\u2019est l\u2019investissement consacr\u00e9 au d\u00e9veloppement des \u00e9quipes. Catalogue de formations externes, tech days r\u00e9currents pour exp\u00e9rimenter, partages r\u00e9guliers des innovations du march\u00e9 sur nos canaux internes.",
@@ -1529,7 +1525,7 @@ var EN = {
   "att-n1":"01","att-h1":"Test, try, dare, even if it\u2019s imperfect","att-p1":"We encourage ideas, even those not yet fully formed. Tech-days, every other Friday, are days where anything goes: test a process, improve old code, explore a lead. If it\u2019s not finished? No problem, we\u2019ll have made progress.",
   "att-n2":"02","att-h2":"Feedback is key","att-p2":"Managers regularly gather team feedback and aren\u2019t afraid to give it. This exchange culture extends to end users, to ensure products truly meet their needs. We listen, we adjust.",
   "att-n3":"03","att-h3":"Synergies that boost everyone","att-p3":"A useful tool developed by one team? It will likely be shared with other subsidiaries. Example: an SEO monitoring tool built at Saabre was adapted for Chargemap. We share resources and progress together.",
-  "wl-label":"Work environment","wl-h2":"A framework designed for<br>working well","wl-intro":"Because we work with humans. That changes everything.",
+  "wl-label":"Work environment","wl-h2":"A framework designed for working well","wl-intro":"Because we work with humans. That changes everything.",
   "wl1-num":"01","wl1-h3":"Choose your mode","wl1-p":"Flex office, remote, or classic office: at Brakson, everyone organises as they wish. What matters is being comfortable and effective. Moving house, specific needs? We adapt and find what works together.",
   "wl2-num":"02","wl2-h3":"Innovation, a second nature","wl2-p":"Brakson never rests on its laurels. A dedicated group constantly explores new technologies, especially AI. If it fits, we integrate it. If not, we move on. No pressure: just permanent, collective, and assumed curiosity.",
   "wl3-num":"03","wl3-h3":"30% for your development","wl3-p":"In 2024\u20132025, this is the investment dedicated to team development. External training catalogue, recurring tech days to experiment, regular market innovation sharing on internal channels.",
